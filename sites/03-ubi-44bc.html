@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ubi — Request a Chariot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#000;--g1:#f3f3f3;--g2:#e8e8e8;--muted:#5e5e5e;--line:#e2e2e2;--blue:#276ef1;--green:#05944f;--red:#e11900}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,Helvetica,sans-serif;color:#000;background:#fff;font-size:14px}
+  header{background:#000;color:#fff;height:64px;display:flex;align-items:center;padding:0 28px;gap:28px}
+  .logo{font-family:Cinzel,serif;font-size:26px;font-weight:700;letter-spacing:1px}
+  header nav{display:flex;gap:6px}
+  header nav a{padding:8px 14px;border-radius:100px;font-weight:500}
+  header nav a.on{background:#fff;color:#000}
+  header .r{margin-left:auto;display:flex;gap:16px;align-items:center;font-weight:500}
+  header .pill{background:#282828;padding:8px 14px;border-radius:100px}
+  header .av{width:36px;height:36px;border-radius:50%;background:#c9b27a;display:grid;place-items:center;font-size:20px}
+  .alert{background:#fff4e5;border-bottom:1px solid #ffd9a8;padding:10px 28px;display:flex;gap:10px;align-items:center;font-size:14px}
+  .alert b{font-weight:700}
+  .alert a{margin-left:auto;text-decoration:underline;font-weight:600}
+  .wrap{display:grid;grid-template-columns:400px 440px 1fr;gap:24px;padding:24px 28px;height:900px}
+  .panel{border-radius:12px;padding:18px;box-shadow:0 0 0 1px var(--line)}
+  h2{font-size:28px;font-weight:700;margin-bottom:16px;letter-spacing:-.4px}
+  .loc{background:var(--g1);border-radius:8px;display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:8px;font-size:16px;font-weight:500}
+  .loc .dot{width:10px;height:10px;border-radius:50%;background:#000;flex-shrink:0}
+  .loc .sq{width:10px;height:10px;background:#000;flex-shrink:0}
+  .loc small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+  .line{width:2px;height:18px;background:#000;margin:-6px 0 -6px 18px;position:relative;z-index:1}
+  .row{display:flex;gap:8px;margin:12px 0}
+  .chip{background:var(--g1);border-radius:100px;padding:10px 14px;font-weight:600;font-size:14px;display:flex;gap:6px;align-items:center}
+  .btnb{background:#000;color:#fff;border:0;border-radius:8px;padding:14px;width:100%;font-size:16px;font-weight:600;font-family:inherit;margin-top:6px}
+  .recent{margin-top:20px}
+  .recent h4{font-size:16px;margin-bottom:6px}
+  .rc{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .rc .ic{width:36px;height:36px;background:var(--g1);border-radius:50%;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+  .rc b{display:block;font-weight:600}
+  .rc span{color:var(--muted);font-size:13px}
+  /* options */
+  .opts h3{font-size:24px;font-weight:700;margin-bottom:4px}
+  .opts .sub{color:var(--muted);margin-bottom:12px}
+  .opt{display:grid;grid-template-columns:92px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:12px;border:2px solid transparent;margin-bottom:4px}
+  .opt.on{border-color:#000}
+  .opt .vis{height:64px;display:grid;place-items:center}
+  .opt b{font-size:17px;font-weight:700;display:flex;align-items:center;gap:6px}
+  .opt .seats{font-weight:500;font-size:13px}
+  .opt .eta{font-size:13px;margin-top:2px}
+  .opt .desc{color:var(--muted);font-size:13px}
+  .opt .pr{text-align:right;font-weight:700;font-size:17px}
+  .opt .pr s{display:block;color:var(--muted);font-weight:400;font-size:13px}
+  .tag{display:inline-block;background:#e6f2ed;color:var(--green);font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px}
+  .tag.b{background:#eff3fe;color:var(--blue)}
+  .tag.r{background:#ffefed;color:var(--red)}
+  .pay{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:10px;font-weight:600}
+  .pay span{display:flex;gap:8px;align-items:center}
+  .req{background:#000;color:#fff;border-radius:8px;padding:16px;text-align:center;font-size:17px;font-weight:600;margin-top:12px}
+  /* map */
+  .map{border-radius:12px;overflow:hidden;position:relative;background:#eae4d3}
+  .map svg{display:block}
+  .driver{position:absolute;left:20px;bottom:20px;width:380px;background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:18px}
+  .driver .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+  .driver .top b{font-size:18px}
+  .driver .min{background:#000;color:#fff;border-radius:6px;padding:6px 10px;font-weight:700;text-align:center;line-height:1.1}
+  .driver .min small{display:block;font-size:10px;font-weight:500}
+  .drow{display:flex;gap:14px;align-items:center}
+  .dav{width:56px;height:56px;border-radius:50%;background:#d9c7a3;display:grid;place-items:center;font-size:30px;position:relative}
+  .dav i{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);background:#fff;border-radius:10px;padding:0 6px;font-size:11px;font-style:normal;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.2);white-space:nowrap}
+  .plate{margin-left:auto;text-align:right}
+  .plate b{display:block;font-size:18px;letter-spacing:1px;font-family:Cinzel,serif}
+  .plate span{color:var(--muted);font-size:13px}
+  .dmsg{display:flex;gap:8px;margin-top:14px}
+  .dmsg div{background:var(--g1);border-radius:100px;padding:10px 14px;flex:1;color:var(--muted)}
+  .dmsg span{background:var(--g1);border-radius:50%;width:40px;height:40px;display:grid;place-items:center}
+  .safety{margin-top:12px;background:#ffefed;color:#8a1300;border-radius:8px;padding:10px 12px;font-size:13px}
+  .zoom{position:absolute;right:20px;bottom:20px;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+  .zoom div{width:40px;height:40px;display:grid;place-items:center;font-size:20px}
+  .zoom div+div{border-top:1px solid var(--line)}
+  .surge{position:absolute;top:20px;left:20px;background:#fff;border-radius:100px;padding:8px 14px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;gap:8px;align-items:center}
+  .surge i{color:var(--blue);font-style:normal}
+  .promo{background:#f6f0ff;border-radius:12px;padding:14px;margin-top:16px;display:flex;gap:12px;align-items:center}
+  .promo b{display:block}
+  .promo span{color:var(--muted);font-size:13px}
+  footer{padding:18px 28px;color:var(--muted);font-size:12px;display:flex;gap:18px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">UBI</div>
+  <nav><a class="on">Ride</a><a>Drive</a><a>Senate Business</a><a>Ubi Eats (Garum)</a><a>About</a></nav>
+  <div class="r"><span>🌐 LA</span><span>Help</span><span class="pill">🧾 Activity</span><div class="av">🏛️</div><span>Gaius J. ▾</span></div>
+</header>
+<div class="alert">⚠️ <span><b>Travel advisory for the Ides of March:</b> Heavy senator activity near the Theatre of Pompey. A soothsayer has flagged this trip. Consider staying home.</span><a>Learn more</a></div>
+
+<div class="wrap">
+  <div>
+    <div class="panel">
+      <h2>Get a ride</h2>
+      <div class="loc"><span class="dot"></span><div>Domus Publica, Via Sacra<small>Pickup · Your house, as Pontifex Maximus</small></div></div>
+      <div class="line"></div>
+      <div class="loc"><span class="sq"></span><div>Curia of Pompey<small>Dropoff · Senate meeting (optional?)</small></div></div>
+      <div class="row"><span class="chip">🕐 Pickup now ▾</span><span class="chip">👤 For me ▾</span></div>
+      <button class="btnb">Search</button>
+      <div class="recent">
+        <h4>Recent</h4>
+        <div class="rc"><div class="ic">🏟️</div><div><b>Circus Maximus</b><span>Vallis Murcia · Chariot races, Tuesday</span></div></div>
+        <div class="rc"><div class="ic">🏺</div><div><b>Villa of Cleopatra</b><span>Trastevere · 14 visits this month 👀</span></div></div>
+        <div class="rc"><div class="ic">⚔️</div><div><b>Rubicon River Crossing</b><span>Gallia Cisalpina · "The die is cast" trip</span></div></div>
+        <div class="rc"><div class="ic">🛁</div><div><b>Baths of Agrippa</b><span>Campus Martius · Not built yet</span></div></div>
+      </div>
+      <div class="promo"><span style="font-size:28px">🎟️</span><div><b>X% off your next 3 triumphs</b><span>Use code VENIVIDIVICI at checkout</span></div></div>
+    </div>
+  </div>
+
+  <div class="panel opts">
+    <h3>Choose a ride</h3>
+    <div class="sub">Rides we think you'll like · Prices in denarii</div>
+
+    <div class="opt on">
+      <div class="vis"><svg width="88" height="56" viewBox="0 0 88 56"><ellipse cx="44" cy="52" rx="40" ry="3" fill="#000" opacity=".12"/><path d="M40 18 h30 q6 0 6 8 v10 h-40 z" fill="#b21f1f"/><path d="M40 18 h30 v4 h-30z" fill="#e8b93c"/><circle cx="58" cy="40" r="11" fill="none" stroke="#5a3a1a" stroke-width="3"/><path d="M58 29v22M47 40h22M50 32l16 16M66 32l-16 16" stroke="#5a3a1a" stroke-width="1.5"/><path d="M40 30 H6" stroke="#5a3a1a" stroke-width="2"/><path d="M4 30 q-2 -12 8 -14 l4 -6 3 5 q6 2 6 10 v10 l-3 12 h-3 l1-10 -6 0 -2 10 h-3 l1-12 q-6-2-6-5z" fill="#7a4b23"/></svg></div>
+      <div><b>UbiX <span class="seats">👤 2</span></b><div class="eta">3 min away · 12:14 (hora sexta)</div><div class="desc">Affordable two-wheel chariot</div><span class="tag">Faster</span></div>
+      <div class="pr">IV d.<s>VI d.</s></div>
+    </div>
+
+    <div class="opt">
+      <div class="vis"><svg width="88" height="56" viewBox="0 0 88 56"><ellipse cx="44" cy="52" rx="40" ry="3" fill="#000" opacity=".12"/><path d="M48 16 h30 q6 0 6 8 v12 h-36z" fill="#6b1a8a"/><path d="M48 16 h30 v4 h-30z" fill="#e8b93c"/><circle cx="66" cy="40" r="11" fill="none" stroke="#5a3a1a" stroke-width="3"/><path d="M48 30 H10" stroke="#5a3a1a" stroke-width="2"/><g fill="#6d4420"><path d="M2 30 q-2 -12 8 -14 l4 -6 3 5 q6 2 6 10 v10 l-3 12 h-3 l1-10 -6 0 -2 10 h-3 l1-12 q-6-2-6-5z"/><path d="M14 32 q-2 -12 8 -14 l4 -6 3 5 q6 2 6 10 v10 l-3 12 h-3 l1-10 -6 0 -2 10 h-3 l1-12 q-6-2-6-5z" opacity=".85"/></g></svg></div>
+      <div><b>Ubi Quadriga <span class="seats">👤 4</span></b><div class="eta">6 min away · 12:17</div><div class="desc">Four horses. For when you've just conquered Gaul.</div><span class="tag b">Triumph-ready</span></div>
+      <div class="pr">XII d.</div>
+    </div>
+
+    <div class="opt">
+      <div class="vis"><svg width="88" height="56" viewBox="0 0 88 56"><ellipse cx="44" cy="52" rx="40" ry="3" fill="#000" opacity=".12"/><path d="M4 26 H84" stroke="#5a3a1a" stroke-width="3"/><rect x="26" y="10" width="36" height="22" rx="3" fill="#c9a24a"/><path d="M28 10 q16 -10 32 0" fill="#8a1c1c"/><rect x="32" y="14" width="10" height="14" fill="#f3e6c4"/><g fill="#8a5a3a"><circle cx="12" cy="30" r="4"/><circle cx="76" cy="30" r="4"/><rect x="9" y="34" width="6" height="14"/><rect x="73" y="34" width="6" height="14"/></g></svg></div>
+      <div><b>Ubi Litter Comfort <span class="seats">👤 1</span></b><div class="eta">14 min away · 12:25</div><div class="desc">Carried by 6 bearers. Curtains for privacy.</div><span class="tag">Quiet mode</span></div>
+      <div class="pr">XX d.</div>
+    </div>
+
+    <div class="opt">
+      <div class="vis" style="font-size:44px">🐘</div>
+      <div><b>Ubi Hannibal <span class="seats">👤 3</span></b><div class="eta">Crossing the Alps · ~16 days</div><div class="desc">Classic elephant. Scenic route. Rarely arrives.</div><span class="tag r">Carthaginian driver</span></div>
+      <div class="pr">L d.</div>
+    </div>
+
+    <div class="opt">
+      <div class="vis" style="font-size:44px">🚣</div>
+      <div><b>Ubi Trireme <span class="seats">👤 12</span></b><div class="eta">Via Tiber · 40 min</div><div class="desc">170 rowers. Drummer included.</div></div>
+      <div class="pr">XXX d.</div>
+    </div>
+
+    <div class="pay"><span>💰 Denarius purse · Personal ▾</span><span style="color:var(--muted)">Add tip in olives</span></div>
+    <div class="req">Request UbiX</div>
+  </div>
+
+  <div class="map">
+    <svg width="100%" height="100%" viewBox="0 0 520 852" preserveAspectRatio="xMidYMid slice">
+      <rect width="520" height="852" fill="#eee7d4"/>
+      <!-- parks / hills -->
+      <path d="M40 120 q60 -40 120 0 q30 60 -20 100 q-80 20 -100 -40z" fill="#d7e3c0"/>
+      <path d="M330 520 q70 -30 120 20 q10 70 -60 80 q-70 -10 -60 -100z" fill="#d7e3c0"/>
+      <path d="M300 180 q50 -20 90 10 q10 40 -30 60 q-60 0 -60 -70z" fill="#d7e3c0"/>
+      <!-- Tiber -->
+      <path d="M-10 60 C120 140 60 260 130 340 S90 520 170 600 S150 780 220 870" stroke="#a9c9e2" stroke-width="34" fill="none"/>
+      <path d="M150 588 l30 10" stroke="#eee7d4" stroke-width="10"/>
+      <!-- roads -->
+      <g stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round">
+        <path d="M150 300 L520 260"/><path d="M200 0 L260 852"/><path d="M160 460 L520 520"/><path d="M380 0 L420 852"/><path d="M230 600 L520 700"/><path d="M150 180 L520 120"/>
+      </g>
+      <g stroke="#fff" stroke-width="5" fill="none"><path d="M300 0 L330 852"/><path d="M170 390 L520 380"/><path d="M180 740 L520 800"/><path d="M470 0 L480 852"/></g>
+      <!-- labels -->
+      <g font-family="Inter" font-size="11" fill="#7a7466" font-weight="600">
+        <text x="70" y="150">CAMPUS</text><text x="70" y="163">MARTIUS</text>
+        <text x="330" y="210">QUIRINAL</text><text x="360" y="570">PALATINE</text><text x="40" y="520" fill="#6c93b5" transform="rotate(-70 40 520)">TIBERIS</text>
+        <text x="350" y="700">CIRCUS MAXIMUS</text>
+      </g>
+      <!-- circus maximus -->
+      <rect x="330" y="640" width="150" height="44" rx="22" fill="#e1d2ae" stroke="#cbb88e"/>
+      <!-- route -->
+      <path d="M392 470 L385 390 L300 380 L262 300 L190 250 L160 215" stroke="#000" stroke-width="6" fill="none" stroke-linejoin="round"/>
+      <!-- pickup -->
+      <circle cx="392" cy="470" r="12" fill="#000"/><circle cx="392" cy="470" r="5" fill="#fff"/>
+      <g transform="translate(392 432)"><rect x="-86" y="-30" width="172" height="34" rx="6" fill="#000"/><text y="-9" fill="#fff" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600">Domus Publica ›</text></g>
+      <!-- dropoff -->
+      <rect x="150" y="205" width="20" height="20" fill="#000"/><rect x="156" y="211" width="8" height="8" fill="#fff"/>
+      <g transform="translate(160 180)"><rect x="-96" y="-32" width="192" height="36" rx="6" fill="#000"/><text y="-9" fill="#fff" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600">Curia of Pompey · 12:31</text></g>
+      <!-- nearby chariots -->
+      <g font-size="22"><text x="410" y="340">🐎</text><text x="250" y="520">🐎</text><text x="310" y="300">🐎</text><text x="440" y="440">🐎</text></g>
+      <!-- senators cluster -->
+      <g><circle cx="175" cy="238" r="34" fill="#e11900" opacity=".12"/><text x="136" y="282" font-size="11" font-family="Inter" font-weight="700" fill="#e11900">23 senators nearby</text></g>
+    </svg>
+    <div class="surge">⚡ <span>Fares are higher due to <i>increased political demand</i></span></div>
+    <div class="driver">
+      <div class="top"><b>Meet at the pickup spot</b><div class="min">III<small>MIN</small></div></div>
+      <div class="drow">
+        <div class="dav">🧔<i>★ 4.97</i></div>
+        <div><b style="font-size:16px">Marcus Junius B.</b><div style="color:var(--muted);font-size:13px">"Friend of the family" · 2,044 trips</div></div>
+        <div class="plate"><b>SPQR·XLIV</b><span>Red Chariot · UbiX</span></div>
+      </div>
+      <div class="dmsg"><div>Any pickup notes for Marcus?</div><span>📞</span></div>
+      <div class="safety">🛡️ <b>Safety check:</b> 22 other riders are also heading to your destination with knives. Share trip status with Calpurnia?</div>
+    </div>
+    <div class="zoom"><div>+</div><div>−</div></div>
+  </div>
+</div>
+<footer><span>© 44 BC Ubi Technologies S.P.Q.R.</span><span>Privacy</span><span>Accessibility</span><span>Terms</span><span>Beware the Ides</span></footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "historical-htmls",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "NODE_USE_ENV_PROXY=1 node scripts/render.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

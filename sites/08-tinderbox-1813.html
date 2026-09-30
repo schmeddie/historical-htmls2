@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tinderbox | Dating, Make Acquaintances &amp; Meet Eligible Persons of Fortune</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{--grad:linear-gradient(262deg,#ff7854,#fd267d);--text:#21262e;--muted:#7c8591;--line:#e9ebee;--bg:#f0f2f4}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,-apple-system,sans-serif;color:var(--text);background:#fff;font-size:14px}
+  .app{display:grid;grid-template-columns:375px 1fr;height:960px}
+  /* sidebar */
+  .side{border-right:1px solid var(--line);display:flex;flex-direction:column}
+  .sh{background:var(--grad);height:72px;display:flex;align-items:center;padding:0 16px;gap:12px;color:#fff}
+  .sh .me{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.12);padding:6px 14px 6px 6px;border-radius:100px;font-weight:700;font-size:16px}
+  .sh .me i{width:32px;height:32px;border-radius:50%;background:#fbe1c8;display:grid;place-items:center;font-style:normal;font-size:18px}
+  .sh .ic{margin-left:auto;display:flex;gap:10px}
+  .sh .ic span{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.15);display:grid;place-items:center;font-size:17px}
+  .stabs{display:flex;gap:26px;padding:18px 20px 0;font-weight:700;font-size:16px}
+  .stabs span{padding-bottom:8px;color:var(--muted)}
+  .stabs span.on{color:var(--text);box-shadow:inset 0 -3px 0 #fd267d}
+  .stabs .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#fd267d;margin-left:4px;vertical-align:4px}
+  .matches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 16px 6px}
+  .mt{height:138px;border-radius:8px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px;color:#fff;font-weight:700;font-size:13px}
+  .mt:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.6))}
+  .mt span{position:relative;z-index:1}
+  .mt .e{position:absolute;top:22px;left:0;right:0;text-align:center;font-size:48px;z-index:0}
+  .mt.likes{background:linear-gradient(135deg,#f5c542,#e0a82e);flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .mt.likes b{width:46px;height:46px;border-radius:50%;background:#fff;color:#c48a00;display:grid;place-items:center;font-size:20px;margin-bottom:8px;filter:blur(0)}
+  .mt.likes:after{display:none}
+  .msgs h4{padding:16px 20px 6px;font-size:16px}
+  .msg{display:flex;gap:14px;padding:12px 20px;align-items:center}
+  .msg.on{background:#f5f7fa}
+  .mav{width:64px;height:64px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:32px;position:relative}
+  .mav.new:after{content:"";position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#fd267d;border:2px solid #fff}
+  .msg b{font-size:16px;display:block}
+  .msg span{color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+  .msg .yt{color:var(--text);font-weight:600}
+  /* main */
+  .main{background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+  .card{width:375px;height:667px;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.15);background:#fff}
+  .card2{position:absolute;width:375px;height:667px;border-radius:10px;background:#d7cbb8;transform:translate(10px,6px) rotate(3deg);box-shadow:0 2px 10px rgba(0,0,0,.1)}
+  .portrait{position:absolute;inset:0}
+  .bars{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:4px;z-index:2}
+  .bars i{flex:1;height:4px;border-radius:2px;background:rgba(0,0,0,.25)}
+  .bars i.on{background:#fff}
+  .info{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 96px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.82) 45%);z-index:2}
+  .recent{display:inline-flex;align-items:center;gap:6px;background:#1ac98f;padding:2px 8px;border-radius:100px;font-size:12px;font-weight:700;margin-bottom:8px}
+  .name{font-size:32px;font-weight:800;display:flex;align-items:baseline;gap:10px}
+  .name small{font-size:26px;font-weight:400}
+  .name .ck{width:24px;height:24px;border-radius:50%;background:#1786ff;display:grid;place-items:center;font-size:13px;align-self:center}
+  .ln{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:16px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .chips span{background:rgba(255,255,255,.2);border-radius:100px;padding:4px 10px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+  .quote{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;margin-top:10px;line-height:1.35;opacity:.95}
+  .up{position:absolute;right:16px;bottom:210px;width:30px;height:30px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-weight:800;z-index:3}
+  .actions{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;align-items:center;gap:14px;z-index:3}
+  .btn{border-radius:50%;background:rgba(0,0,0,.35);display:grid;place-items:center;border:2px solid;backdrop-filter:blur(6px)}
+  .btn.s{width:48px;height:48px;font-size:20px}
+  .btn.l{width:62px;height:62px;font-size:28px}
+  .rewind{border-color:#f5b748;color:#f5b748}
+  .nope{border-color:#fd267d;color:#fd267d}
+  .star{border-color:#1786ff;color:#1786ff}
+  .like{border-color:#1ac98f;color:#1ac98f}
+  .boost{border-color:#a64cff;color:#a64cff}
+  .keys{margin-top:22px;display:flex;gap:20px;color:var(--muted);font-size:12px;font-weight:600}
+  .keys span{display:flex;gap:6px;align-items:center}
+  .keys kbd{background:#fff;border-radius:4px;padding:2px 6px;box-shadow:0 1px 2px rgba(0,0,0,.2);font-family:inherit}
+  .stamp{position:absolute;top:40px;left:20px;border:5px solid #1ac98f;color:#1ac98f;font-weight:900;font-size:40px;padding:0 10px;border-radius:8px;transform:rotate(-18deg);letter-spacing:2px;z-index:3;opacity:.95}
+  /* toast */
+  .toast{position:absolute;right:30px;top:30px;width:330px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);padding:16px;display:flex;gap:12px}
+  .toast .mav{width:48px;height:48px;font-size:24px}
+  .toast b{display:block;font-size:15px}
+  .toast span{color:var(--muted);font-size:13px}
+  .gold{position:absolute;left:30px;top:30px;background:linear-gradient(135deg,#d4a634,#f7df8c 50%,#b38421);border-radius:12px;padding:14px 18px;width:300px;color:#3b2a00;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+  .gold b{font-size:16px;display:block;font-family:'Playfair Display',serif}
+  .gold span{font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="sh">
+      <div class="me"><i>👒</i>Elizabeth</div>
+      <div class="ic"><span>🧭</span><span>💼</span><span>🛡️</span></div>
+    </div>
+    <div class="stabs"><span class="on">Matches<i class="dot"></i></span><span>Letters</span></div>
+    <div class="matches">
+      <div class="mt likes"><b>12</b><span style="color:#3b2a00">12 Gentlemen<br>like you</span></div>
+      <div class="mt" style="background:#b88e6b"><span class="e">🎩</span><span>Mr. Bingley</span></div>
+      <div class="mt" style="background:#8a6a8a"><span class="e">🎖️</span><span>Col. Fitzwilliam</span></div>
+      <div class="mt" style="background:#6a8aa0"><span class="e">🪖</span><span>Capt. Wentworth</span></div>
+      <div class="mt" style="background:#a08a6a"><span class="e">📚</span><span>Mr. Knightley</span></div>
+      <div class="mt" style="background:#7a9a6a"><span class="e">🌾</span><span>Mr. Martin</span></div>
+    </div>
+    <div class="msgs">
+      <h4>Letters</h4>
+      <div class="msg on"><div class="mav new" style="background:#c4a47a">😏</div><div><b>Mr. Wickham</b><span class="yt">hey 😉 what's your dowry situation</span></div></div>
+      <div class="msg"><div class="mav new" style="background:#b7b0a0">🙇</div><div><b>Mr. Collins</b><span class="yt">Pray allow me to first acquaint you with my most excellent patroness, Lady Catherine de Bourgh, whose…</span></div></div>
+      <div class="msg"><div class="mav" style="background:#d9c7a3">😊</div><div><b>Mr. Bingley</b><span>Netherfield Park is let at last!! 🏡 ball on Tues?</span></div></div>
+      <div class="msg"><div class="mav" style="background:#a3b7c9">✉️</div><div><b>Jane 💕 (sister)</b><span>You: Lizzy, he danced with me TWICE</span></div></div>
+      <div class="msg"><div class="mav" style="background:#e9d0d0">🗣️</div><div><b>Mrs. Bennet</b><span>My nerves!! Have you matched with anyone of 4,000 a year yet</span></div></div>
+      <div class="msg"><div class="mav" style="background:#bbb">🧓</div><div><b>Lady Catherine de B.</b><span>I am most seriously displeased. Unmatch him at once.</span></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="gold"><b>Tinderbox Gold ✨</b><span>See who has already asked your father's permission. From 2 guineas/month.</span></div>
+    <div class="toast"><div class="mav" style="background:#d9c7a3">💃</div><div><b>Assembly Room nearby!</b><span>47 eligible persons are dancing the quadrille in Meryton right now.</span></div></div>
+
+    <div style="position:relative">
+      <div class="card2"></div>
+      <div class="card">
+        <svg class="portrait" viewBox="0 0 375 667" width="375" height="667">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7f6a"/><stop offset=".6" stop-color="#3f4a3a"/><stop offset="1" stop-color="#1c211a"/></linearGradient>
+            <radialGradient id="skin" cx="45%" cy="40%"><stop offset="0" stop-color="#f3d5bb"/><stop offset="1" stop-color="#d4a584"/></radialGradient>
+            <linearGradient id="coat" x1="0" x2="1"><stop offset="0" stop-color="#1b2433"/><stop offset=".5" stop-color="#2b3a52"/><stop offset="1" stop-color="#141b27"/></linearGradient>
+          </defs>
+          <rect width="375" height="667" fill="url(#bg)"/>
+          <!-- Pemberley in background -->
+          <g opacity=".55">
+            <path d="M0 360 Q120 330 240 350 T375 340 V420 H0Z" fill="#2c3a28"/>
+            <rect x="30" y="300" width="160" height="60" fill="#c9b99a"/><path d="M20 300 L110 262 L200 300Z" fill="#a8977a"/>
+            <g fill="#4a5a4a"><rect x="44" y="314" width="12" height="18"/><rect x="70" y="314" width="12" height="18"/><rect x="96" y="314" width="12" height="18"/><rect x="122" y="314" width="12" height="18"/><rect x="148" y="314" width="12" height="18"/><rect x="170" y="314" width="12" height="18"/></g>
+            <path d="M0 400 Q187 380 375 400 V420 H0Z" fill="#7a9ab0"/>
+          </g>
+          <!-- oil painting frame vignette -->
+          <rect width="375" height="667" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="30"/>
+          <g transform="translate(0 -150)">
+          <!-- body -->
+          <path d="M60 667 Q70 470 187 440 Q304 470 315 667Z" fill="url(#coat)"/>
+          <path d="M150 450 L187 560 L224 450 Q205 440 187 442 Q169 440 150 450Z" fill="#f4f1e8"/>
+          <path d="M160 452 Q187 500 214 452 Q200 478 187 476 Q174 478 160 452Z" fill="#fff"/>
+          <path d="M140 460 L187 600 L130 667 H100 Q110 520 140 460Z" fill="#101722"/>
+          <path d="M234 460 L187 600 L244 667 H274 Q264 520 234 460Z" fill="#101722"/>
+          <g fill="#c9a24a"><circle cx="170" cy="600" r="4"/><circle cx="204" cy="600" r="4"/><circle cx="168" cy="630" r="4"/><circle cx="206" cy="630" r="4"/></g>
+          <!-- neck & head -->
+          <rect x="170" y="400" width="34" height="50" fill="#d9ad8c"/>
+          <ellipse cx="187" cy="345" rx="58" ry="72" fill="url(#skin)"/>
+          <!-- hair -->
+          <path d="M126 340 Q118 270 175 262 Q235 256 250 318 Q248 290 226 284 Q200 300 160 292 Q140 300 136 346Z" fill="#3a2414"/>
+          <path d="M128 340 q-6 30 6 50 q-2 -30 2 -46z M246 340 q6 30 -6 50 q2 -30 -2 -46z" fill="#3a2414"/>
+          <!-- face -->
+          <path d="M156 336 q12 -8 24 0 M196 336 q12 -8 24 0" stroke="#3a2414" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <ellipse cx="168" cy="348" rx="5" ry="4" fill="#2a1a10"/><ellipse cx="208" cy="348" rx="5" ry="4" fill="#2a1a10"/>
+          <path d="M188 352 q-6 20 -2 26 q6 2 10 -2" stroke="#b07a5a" stroke-width="2.5" fill="none"/>
+          <path d="M172 392 q16 4 32 -2" stroke="#8a4a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- sideburns -->
+          <path d="M132 342 q2 30 12 44 v-40z M242 342 q-2 30 -12 44 v-40z" fill="#3a2414"/>
+          <!-- cravat -->
+          <path d="M168 430 q19 20 38 0 q-4 22 -19 26 q-15 -4 -19 -26z" fill="#fff" stroke="#ddd"/>
+          <rect x="60" y="667" width="255" height="160" fill="#141b27"/>
+          </g>
+        </svg>
+        <div class="bars"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <div class="stamp">LIKE</div>
+        <div class="info">
+          <div class="recent">● Recently Active (at a ball)</div>
+          <div class="name">Fitzwilliam <small>28</small><span class="ck">✓</span></div>
+          <div class="ln">🏰 Master of Pemberley, Derbyshire</div>
+          <div class="ln">💷 £10,000 a year · 📍 3 miles away (Netherfield)</div>
+          <div class="chips"><span>🎓 Cambridge</span><span>📏 6'2"</span><span>🐕 Hounds</span><span>🚫 Dancing</span><span>♑ Proud</span><span>📖 Letter-writer</span></div>
+          <div class="quote">"Not handsome enough to tempt me"… is what I said once. I have since reconsidered. Looking for someone with fine eyes. 🙄</div>
+        </div>
+        <div class="up">↑</div>
+        <div class="actions">
+          <span class="btn s rewind">↺</span>
+          <span class="btn l nope">✕</span>
+          <span class="btn s star">★</span>
+          <span class="btn l like">♥</span>
+          <span class="btn s boost">⚡</span>
+        </div>
+      </div>
+    </div>
+    <div class="keys"><span><kbd>←</kbd> Nope</span><span><kbd>→</kbd> Like</span><span><kbd>↑</kbd> Open Profile</span><span><kbd>↵</kbd> Send Calling Card</span><span><kbd>⎵</kbd> Next Portrait</span></div>
+  </main>
+</div>
+</body>
+</html>

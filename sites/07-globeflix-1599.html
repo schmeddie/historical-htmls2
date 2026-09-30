@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home - Globeflix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#e50914;--bg:#141414;--muted:#a3a3a3}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{overflow-x:hidden;background:var(--bg);color:#fff;font-family:Inter,Helvetica,sans-serif;font-size:14px}
+  header{position:absolute;top:0;left:0;right:0;height:68px;display:flex;align-items:center;padding:0 60px;gap:36px;z-index:5;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent)}
+  .logo{font-family:'Bebas Neue',sans-serif;color:var(--red);font-size:40px;letter-spacing:1px;transform:perspective(200px) rotateX(8deg);text-shadow:0 2px 0 #8a0008}
+  header nav{display:flex;gap:20px;color:#e5e5e5}
+  header nav b{color:#fff}
+  header .r{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:20px}
+  header .r .kids{font-size:14px}
+  header .pav{width:32px;height:32px;border-radius:4px;background:#e8b93c;display:grid;place-items:center;font-size:18px}
+  .hero{height:800px;position:relative;overflow:hidden}
+  .hero svg.bg{position:absolute;inset:0;width:100%;height:100%}
+  .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(77deg,rgba(0,0,0,.75) 0,transparent 60%),linear-gradient(180deg,transparent 60%,var(--bg) 100%)}
+  .hero .info{position:absolute;left:60px;top:170px;width:560px;z-index:2}
+  .orig{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:4px;color:#ddd;font-size:14px}
+  .orig b{font-family:'Bebas Neue';color:var(--red);font-size:28px;letter-spacing:0}
+  .title{font-family:'IM Fell English SC',serif;font-size:136px;line-height:.9;margin:10px 0 18px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+  .top10{display:flex;gap:10px;align-items:center;font-size:22px;font-weight:700;margin-bottom:14px}
+  .top10 i{font-style:normal;background:var(--red);font-family:'Bebas Neue';font-size:12px;line-height:1;padding:4px 4px 2px;border-radius:2px;text-align:center}
+  .top10 i b{display:block;font-size:20px}
+  .syn{font-size:20px;line-height:1.35;text-shadow:0 1px 2px rgba(0,0,0,.6);margin-bottom:24px}
+  .btns{display:flex;gap:12px}
+  .btns span{padding:12px 28px;border-radius:4px;font-size:18px;font-weight:700;display:flex;gap:10px;align-items:center}
+  .play{background:#fff;color:#000}
+  .mi{background:rgba(109,109,110,.7)}
+  .rating{position:absolute;right:0;bottom:250px;z-index:2;background:rgba(51,51,51,.6);border-left:3px solid #dcdcdc;padding:8px 60px 8px 12px;font-size:18px;display:flex;gap:16px;align-items:center}
+  .rating .mute{position:absolute;left:-60px;width:44px;height:44px;border:1px solid #ddd;border-radius:50%;display:grid;place-items:center;font-size:18px;background:transparent}
+  .rows{margin-top:-130px;position:relative;z-index:3;padding-bottom:40px}
+  .row{padding:0 60px;margin-bottom:44px}
+  .row h3{font-size:20px;font-weight:700;margin-bottom:12px;display:flex;align-items:baseline;gap:10px}
+  .row h3 small{color:#54b9c5;font-size:13px;font-weight:600}
+  .tiles{display:flex;gap:8px}
+  .tile{width:216px;height:122px;border-radius:4px;flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:10px}
+  .tile .n{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:26px;line-height:.95;text-shadow:0 2px 8px rgba(0,0,0,.8);position:relative;z-index:1}
+  .tile .e{position:absolute;right:10px;top:4px;font-size:52px;opacity:.9}
+  .tile .g{position:absolute;top:8px;left:8px;font-family:'Bebas Neue';color:var(--red);font-size:22px;line-height:1;z-index:1}
+  .tile .badge{position:absolute;bottom:0;left:50%;transform:translateX(-50%);background:var(--red);font-size:10px;font-weight:700;padding:3px 8px;border-radius:2px 2px 0 0;white-space:nowrap}
+  .tile .prog{position:absolute;bottom:0;left:0;right:0;height:3px;background:#555}
+  .tile .prog i{display:block;height:100%;background:var(--red)}
+  .tile.new:before{content:"NEW PLAY";position:absolute;top:0;right:0;background:var(--red);font-size:9px;font-weight:800;padding:3px 6px;letter-spacing:.5px}
+  .rank{display:flex;gap:8px}
+  .rk{display:flex;align-items:flex-end;width:224px;flex-shrink:0}
+  .rk .num{font-family:Inter;font-weight:800;font-size:200px;line-height:.75;color:var(--bg);-webkit-text-stroke:4px #595959;letter-spacing:-18px;margin-right:4px}
+  .rk .pst{width:120px;height:172px;border-radius:4px;flex-shrink:0;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px}
+  .rk .pst .n{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:20px;line-height:.95;text-shadow:0 2px 8px #000;position:relative}
+  .rk .pst .e{position:absolute;top:18px;left:0;right:0;text-align:center;font-size:56px}
+  .rk .pst .g{position:absolute;top:6px;left:6px;font-family:'Bebas Neue';color:var(--red);font-size:18px;line-height:1}
+  .expand{width:330px;flex-shrink:0;background:#181818;border-radius:6px;box-shadow:0 12px 32px rgba(0,0,0,.8);overflow:hidden;margin-top:-50px;position:relative;z-index:4}
+  .expand .img{height:186px;position:relative;display:flex;align-items:flex-end;padding:12px}
+  .expand .b{padding:14px 16px 18px}
+  .expand .ctl{display:flex;gap:8px;align-items:center}
+  .expand .ctl span{width:40px;height:40px;border-radius:50%;border:2px solid #7a7a7a;display:grid;place-items:center;font-size:15px}
+  .expand .ctl span.p{background:#fff;color:#000;border-color:#fff}
+  .expand .ctl span.dn{margin-left:auto}
+  .expand .meta{display:flex;gap:8px;align-items:center;margin:14px 0 10px;font-weight:600}
+  .expand .meta .m{color:#46d369}
+  .expand .meta .r{border:1px solid #888;padding:0 5px;font-size:12px}
+  .expand .meta .hd{border:1px solid #888;padding:0 4px;font-size:10px;border-radius:3px}
+  .expand .tags{font-size:14px;display:flex;gap:6px;flex-wrap:wrap}
+  .expand .tags i{color:#646464;font-style:normal}
+  footer{padding:30px 200px 60px;color:#808080;font-size:13px}
+  footer .soc{font-size:22px;margin-bottom:20px;display:flex;gap:24px}
+  footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  footer .code{border:1px solid #808080;padding:6px 10px;display:inline-block;margin:24px 0 14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">GLOBEFLIX</div>
+  <nav><b>Home</b><span>Tragedies</span><span>Comedies</span><span>Histories</span><span>New &amp; Popular</span><span>My Quarto List</span><span>Browse by Iambic Pentameter</span></nav>
+  <div class="r"><span>🔍</span><span class="kids">Groundlings</span><span>🔔</span><div class="pav">👑</div><span style="font-size:12px">▾</span></div>
+</header>
+
+<section class="hero">
+  <svg class="bg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="fog" cx="72%" cy="45%" r="60%"><stop offset="0" stop-color="#6a7d8a"/><stop offset=".45" stop-color="#2b3740"/><stop offset="1" stop-color="#0b0f13"/></radialGradient>
+      <radialGradient id="ghost" cx="50%" cy="40%"><stop offset="0" stop-color="#e8f4ff" stop-opacity=".9"/><stop offset="1" stop-color="#9fc4e0" stop-opacity="0"/></radialGradient>
+      <linearGradient id="moon" x1="0" x2="1"><stop offset="0" stop-color="#fdf6d8"/><stop offset="1" stop-color="#d8cfa5"/></linearGradient>
+    </defs>
+    <rect width="1440" height="800" fill="url(#fog)"/>
+    <circle cx="1180" cy="170" r="70" fill="url(#moon)" opacity=".9"/>
+    <!-- castle -->
+    <g fill="#0d1216">
+      <path d="M700 520 V330 h30 v-20 h20 v20 h20 v-20 h20 v20 h30 V520Z"/>
+      <path d="M820 520 V250 h24 v-24 h18 v24 h18 v-24 h18 v24 h24 V520Z"/>
+      <path d="M940 520 V360 h240 V520Z"/>
+      <path d="M1180 520 V290 h26 v-22 h18 v22 h18 v-22 h18 v22 h26 V520Z"/>
+      <path d="M1300 520 V380 h140 V520Z"/>
+      <rect x="0" y="520" width="1440" height="280"/>
+    </g>
+    <g fill="#e8b93c" opacity=".8"><rect x="846" y="300" width="10" height="18"/><rect x="1212" y="330" width="10" height="18"/><rect x="990" y="400" width="8" height="14"/></g>
+    <!-- ghost -->
+    <g transform="translate(980 380)">
+      <ellipse cx="0" cy="40" rx="140" ry="200" fill="url(#ghost)" opacity=".35"/>
+      <path d="M-50 160 Q-60 40 -40 -10 Q-20 -60 0 -62 Q20 -60 40 -10 Q60 40 50 160 Q30 150 20 170 Q0 150 -20 170 Q-30 150 -50 160Z" fill="#dfeefa" opacity=".78"/>
+      <path d="M-26 -40 h52 l-8 -16 h-36z" fill="#b8cadb" opacity=".8"/>
+      <circle cx="-12" cy="-20" r="5" fill="#2b3740"/><circle cx="12" cy="-20" r="5" fill="#2b3740"/>
+    </g>
+    <!-- Hamlet silhouette w/ skull -->
+    <g transform="translate(1250 520)" fill="#050709">
+      <path d="M-40 0 L-30 -150 Q0 -180 30 -150 L40 0Z"/>
+      <circle cx="0" cy="-190" r="28"/>
+      <path d="M30 -140 L110 -190 L118 -180 L44 -126Z"/>
+      <circle cx="122" cy="-200" r="18" fill="#e9e2c8"/>
+      <circle cx="116" cy="-204" r="4" fill="#050709"/><circle cx="128" cy="-204" r="4" fill="#050709"/>
+    </g>
+    <g fill="#fff" opacity=".05"><ellipse cx="400" cy="560" rx="600" ry="40"/><ellipse cx="1100" cy="600" rx="500" ry="30"/></g>
+  </svg>
+  <div class="info">
+    <div class="orig"><b>G</b>ORIGINAL PLAY</div>
+    <div class="title">Hamlet</div>
+    <div class="top10"><i>TOP<b>10</b></i>#1 in London Today</div>
+    <div class="syn">A Danish prince, a ghost with unfinished business, and one extremely long monologue. To binge, or not to binge? Now with 4 hours of runtime (uncut).</div>
+    <div class="btns"><span class="play">▶ Play</span><span class="mi">ⓘ More Info</span></div>
+  </div>
+  <div class="rating"><span class="mute">🔇</span>⚔️ 16+ · violence, ghosts, poisoned goblets</div>
+</section>
+
+<div class="rows">
+  <div class="row">
+    <h3>Continue Watching for Elizabeth</h3>
+    <div class="tiles">
+      <div class="tile" style="background:linear-gradient(135deg,#2a0e14,#8a1c2c)"><span class="g">G</span><span class="e">🗡️</span><span class="n">Julius<br>Caesar</span><div class="prog"><i style="width:62%"></i></div></div>
+      <div class="tile" style="background:linear-gradient(135deg,#1a2b1a,#3d6a3a)"><span class="g">G</span><span class="e">🧚</span><span class="n">A Midsummer<br>Night's Dream</span><div class="prog"><i style="width:30%"></i></div></div>
+      <div class="tile" style="background:linear-gradient(135deg,#2a2210,#8a6a1c)"><span class="g">G</span><span class="e">👑</span><span class="n">Henry V</span><div class="prog"><i style="width:88%"></i></div></div>
+      <div class="tile" style="background:linear-gradient(135deg,#101a2a,#2a4a7a)"><span class="e">😈</span><span class="n">Doctor<br>Faustus</span><div class="prog"><i style="width:45%"></i></div></div>
+      <div class="tile" style="background:linear-gradient(135deg,#2a1a2a,#6a2a5a)"><span class="g">G</span><span class="e">🌹</span><span class="n">Much Ado<br>About Nothing</span><div class="prog"><i style="width:10%"></i></div></div>
+      <div class="tile" style="background:linear-gradient(135deg,#231510,#5a3a20)"><span class="e">💰</span><span class="n">The Jew of<br>Malta</span><div class="prog"><i style="width:74%"></i></div></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Top 10 Plays in London Today</h3>
+    <div class="rank">
+      <div class="rk"><span class="num">1</span><div class="pst" style="background:linear-gradient(180deg,#2b3740,#0b0f13)"><span class="g">G</span><span class="e">💀</span><span class="n">Hamlet</span></div></div>
+      <div class="rk"><span class="num">2</span><div class="pst" style="background:linear-gradient(180deg,#8a1c2c,#2a0e14)"><span class="g">G</span><span class="e">💘</span><span class="n">Romeo &amp;<br>Juliet</span></div></div>
+      <div class="rk"><span class="num">3</span><div class="pst" style="background:linear-gradient(180deg,#5a1a10,#1a0a06)"><span class="g">G</span><span class="e">🥧</span><span class="n">Titus<br>Andronicus</span></div></div>
+      <div class="rk"><span class="num">4</span><div class="pst" style="background:linear-gradient(180deg,#2a2a5a,#0a0a1a)"><span class="e">🎭</span><span class="n">Every Man in<br>His Humour</span></div></div>
+      <div class="expand">
+        <div class="img" style="background:linear-gradient(135deg,#0a1a2a,#1e4a6a 55%,#e8b93c 140%)"><span style="position:absolute;right:20px;top:20px;font-size:80px">🧙</span><span class="n" style="font-family:'Cormorant Garamond';font-style:italic;font-weight:700;font-size:32px;text-shadow:0 2px 8px #000">Macbeth</span><span style="position:absolute;left:12px;top:10px;background:var(--red);font-size:10px;font-weight:800;padding:3px 6px">COMING 1606</span></div>
+        <div class="b">
+          <div class="ctl"><span class="p">▶</span><span>＋</span><span>👍</span><span class="dn">⌄</span></div>
+          <div class="meta"><span class="m">98% Match</span><span class="r">16+</span><span>1 Season · 5 Acts</span><span class="hd">HD</span></div>
+          <div class="tags">Ominous <i>•</i> Witchy <i>•</i> Don't say its name in the theatre</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Because you watched <i style="font-family:'Cormorant Garamond';font-size:22px">Richard III</i> <small>Explore All ›</small></h3>
+    <div class="tiles">
+      <div class="tile new" style="background:linear-gradient(135deg,#2a2a10,#6a5a20)"><span class="g">G</span><span class="e">🐴</span><span class="n">Richard II</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#102a2a,#1c6a6a)"><span class="g">G</span><span class="e">🌊</span><span class="n">The Comedy<br>of Errors</span><span class="badge">Recently added</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#1a102a,#4a2a8a)"><span class="g">G</span><span class="e">🍺</span><span class="n">Henry IV,<br>Part 1</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#1a1a1a,#4a4a4a)"><span class="g">G</span><span class="e">🐕</span><span class="n">Two Gentlemen<br>of Verona</span></div>
+      <div class="tile new" style="background:linear-gradient(135deg,#2a1010,#7a2020)"><span class="g">G</span><span class="e">🐻</span><span class="n">Exit, Pursued<br>by a Bear</span><span class="badge">Spin-off · 1611</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#0a2a1a,#2a7a4a)"><span class="g">G</span><span class="e">🌲</span><span class="n">As You<br>Like It</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Rival Theatres: The Rose &amp; The Curtain</h3>
+    <div class="tiles">
+      <div class="tile" style="background:linear-gradient(135deg,#3a0a1a,#aa2a4a)"><span class="e">🌹</span><span class="n">The Spanish<br>Tragedy</span><span class="badge">Kyd · Rose Original</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#2a200a,#8a6a20)"><span class="e">🐂</span><span class="n">Tamburlaine<br>the Great</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#1a1a2a,#3a3a6a)"><span class="e">🐻</span><span class="n">Bear-Baiting<br>Live (Southwark)</span><span class="badge">LIVE NOW</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#2a2a2a,#6a6a6a)"><span class="e">📜</span><span class="n">Sermons at<br>St Paul's</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#1a0a0a,#5a1a1a)"><span class="e">🪓</span><span class="n">Public Execution:<br>Tyburn</span><span class="badge">Free w/ ads</span></div>
+      <div class="tile" style="background:linear-gradient(135deg,#0a1a1a,#1a4a4a)"><span class="e">🐓</span><span class="n">Cockfight<br>Highlights</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="soc"><span>📜</span><span>🕊️</span><span>🎺</span><span>🪶</span></div>
+  <div class="cols">
+    <span>Audio Description (Chorus)</span><span>Help Centre</span><span>Gift Cards (Tokens)</span><span>Media Centre</span>
+    <span>Investor Relations (Lord Chamberlain)</span><span>Jobs (Boy Actors Wanted)</span><span>Terms of Use</span><span>Privacy</span>
+    <span>Legal Notices (Master of Revels)</span><span>Cookie Preferences</span><span>Corporate Information</span><span>Contact Us</span>
+  </div>
+  <div class="code">Service Code</div>
+  <div>© 1599 The Lord Chamberlain's Men, Bankside, Southwark. Plague closures may affect availability.</div>
+</footer>
+</body>
+</html>

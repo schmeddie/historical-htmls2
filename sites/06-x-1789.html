@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home / X (Paris, 1789)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#000;--text:#e7e9ea;--muted:#71767b;--line:#2f3336;--blue:#1d9bf0;--pink:#f91880;--green:#00ba7c;--card:#16181c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:Inter,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.35}
+  .app{display:grid;grid-template-columns:275px 600px 350px;gap:0 30px;justify-content:center;min-height:100vh}
+  /* left */
+  .left{padding:4px 12px;position:relative}
+  .xlogo{width:52px;height:52px;display:grid;place-items:center;border-radius:50%}
+  .nav a{display:flex;align-items:center;gap:20px;padding:12px;font-size:20px;border-radius:100px;width:max-content}
+  .nav a.on{font-weight:700}
+  .nav .i{width:26px;text-align:center;font-size:22px;position:relative}
+  .nav .b{position:absolute;top:-6px;right:-8px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:0 5px;border:1px solid #000}
+  .post-btn{background:#eff3f4;color:#0f1419;border-radius:100px;text-align:center;font-weight:700;font-size:17px;padding:15px;margin:16px 0;width:230px}
+  .acct{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:12px;align-items:center;padding:12px;border-radius:100px}
+  .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex-shrink:0;background:#333}
+  .acct b{display:block;font-size:15px}
+  .acct span{color:var(--muted)}
+  /* center */
+  .center{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .tabs{display:flex;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(0,0,0,.65);backdrop-filter:blur(12px)}
+  .tabs div{flex:1;text-align:center;padding:16px 0;color:var(--muted);font-weight:500}
+  .tabs div.on{color:var(--text);font-weight:700;position:relative}
+  .tabs div.on:after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:56px;height:4px;border-radius:4px;background:var(--blue)}
+  .compose{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .compose .t{font-size:20px;color:var(--muted);padding:10px 0 18px}
+  .compose .bar{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;color:var(--blue);gap:14px}
+  .compose .bar b{background:#787a7a;color:#0f1419;padding:8px 18px;border-radius:100px;font-size:15px}
+  .showmore{text-align:center;color:var(--blue);padding:14px;border-bottom:1px solid var(--line)}
+  .tw{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .tw .c{flex:1;min-width:0}
+  .tw .hd{display:flex;gap:4px;align-items:center;white-space:nowrap}
+  .tw .hd b{font-weight:700}
+  .tw .hd span{color:var(--muted)}
+  .tw .hd .more{margin-left:auto;color:var(--muted)}
+  .ck{width:17px;height:17px;display:inline-block;vertical-align:-3px}
+  .tx{margin-top:2px;white-space:pre-line}
+  .tx a{color:var(--blue)}
+  .ac{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:12px;max-width:520px}
+  .ac span{display:flex;gap:6px;align-items:center}
+  .ac .lk{color:var(--pink)}
+  .ac .rt{color:var(--green)}
+  .cn{border:1px solid var(--line);border-radius:16px;margin-top:12px;overflow:hidden}
+  .cn .h{padding:12px 14px 4px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .cn p{padding:0 14px 12px;font-size:15px}
+  .cn .f{border-top:1px solid var(--line);padding:12px 14px;display:flex;justify-content:space-between;font-size:14px}
+  .cn .f b{color:var(--text);font-weight:500}
+  .media{margin-top:12px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .media svg{display:block}
+  .poll{margin-top:12px}
+  .poll .o{position:relative;height:32px;border-radius:6px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;overflow:hidden}
+  .poll .o i{position:absolute;left:0;top:0;bottom:0;background:#333639;border-radius:6px;z-index:0}
+  .poll .o.w i{background:rgba(29,155,240,.55)}
+  .poll .o span{position:relative;z-index:1}
+  .poll .o.w span{font-weight:700}
+  .poll .m{color:var(--muted);font-size:14px;margin-top:4px}
+  .thread{display:flex;flex-direction:column;align-items:center}
+  .thread .ln{width:2px;flex:1;background:#333639;margin-top:4px}
+  .ctx{color:var(--muted);font-size:13px;font-weight:700;padding:12px 16px 0 44px;display:flex;gap:10px}
+  .quote{border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:12px;font-size:15px}
+  .quote .hd{font-size:15px}
+  .ad{color:var(--muted);font-size:13px}
+  /* right */
+  .right{padding-top:8px}
+  .srch{background:#202327;border-radius:100px;padding:12px 20px;color:var(--muted);display:flex;gap:12px}
+  .box{border:1px solid var(--line);border-radius:16px;margin-top:16px;overflow:hidden}
+  .box h3{font-size:20px;font-weight:800;padding:12px 16px}
+  .box p{padding:0 16px 12px}
+  .box .btn{background:var(--blue);color:#fff;font-weight:700;border-radius:100px;padding:8px 16px;display:inline-block;margin:0 16px 16px}
+  .tr{padding:12px 16px}
+  .tr small{color:var(--muted);font-size:13px;display:flex;justify-content:space-between}
+  .tr b{display:block;font-size:15px;margin:2px 0}
+  .tr span{color:var(--muted);font-size:13px}
+  .wtf{display:flex;gap:12px;align-items:center;padding:12px 16px}
+  .wtf b{display:block}
+  .wtf span{color:var(--muted)}
+  .wtf .f{margin-left:auto;background:#eff3f4;color:#0f1419;border-radius:100px;padding:6px 16px;font-weight:700}
+  .showm{color:var(--blue);padding:16px}
+  .foot{color:var(--muted);font-size:13px;padding:14px 16px;line-height:1.7}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="vb" viewBox="0 0 22 22"><path fill="#1d9bf0" d="M20.4 11c0-1.3-.8-2.4-2-2.9.4-1.2.2-2.5-.7-3.4-.9-.9-2.3-1.1-3.4-.7-.5-1.2-1.6-2-2.9-2s-2.4.8-2.9 2c-1.2-.4-2.5-.2-3.4.7-.9.9-1.1 2.2-.7 3.4-1.2.5-2 1.6-2 2.9s.8 2.4 2 2.9c-.4 1.2-.2 2.5.7 3.4.9.9 2.2 1.1 3.4.7.5 1.2 1.6 2 2.9 2s2.4-.8 2.9-2c1.2.4 2.5.2 3.4-.7.9-.9 1.1-2.2.7-3.4 1.2-.5 2-1.6 2-2.9z"/><path d="M9.5 14.7 6.6 11.8l1.1-1.1 1.8 1.8 4.6-4.6 1.1 1.1z" fill="#fff"/></symbol>
+  <symbol id="vg" viewBox="0 0 22 22"><path fill="#e2b719" d="M20.4 11c0-1.3-.8-2.4-2-2.9.4-1.2.2-2.5-.7-3.4-.9-.9-2.3-1.1-3.4-.7-.5-1.2-1.6-2-2.9-2s-2.4.8-2.9 2c-1.2-.4-2.5-.2-3.4.7-.9.9-1.1 2.2-.7 3.4-1.2.5-2 1.6-2 2.9s.8 2.4 2 2.9c-.4 1.2-.2 2.5.7 3.4.9.9 2.2 1.1 3.4.7.5 1.2 1.6 2 2.9 2s2.4-.8 2.9-2c1.2.4 2.5.2 3.4-.7.9-.9 1.1-2.2.7-3.4 1.2-.5 2-1.6 2-2.9z"/><path d="M9.5 14.7 6.6 11.8l1.1-1.1 1.8 1.8 4.6-4.6 1.1 1.1z" fill="#000"/></symbol>
+</defs></svg>
+<div class="app">
+  <aside class="left">
+    <div class="xlogo"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M4 26 L26 4" stroke="#e7e9ea" stroke-width="3.2" stroke-linecap="round"/><path d="M4 4 L26 26" stroke="#e7e9ea" stroke-width="3.2" stroke-linecap="round"/><path d="M22 2 l6 0 0 6z M8 2 l-6 0 0 6z" fill="#e7e9ea"/><circle cx="15" cy="15" r="3" fill="#000" stroke="#e7e9ea" stroke-width="2"/></svg></div>
+    <nav class="nav">
+      <a class="on"><span class="i">🏠</span>Home</a>
+      <a><span class="i">🔍</span>Explore</a>
+      <a><span class="i">🔔<span class="b">20+</span></span>Notifications</a>
+      <a><span class="i">✉️</span>Letters</a>
+      <a><span class="i">📜</span>Grievances</a>
+      <a><span class="i">👥</span>Clubs</a>
+      <a><span class="i">⚜️</span>Premium</a>
+      <a><span class="i">👤</span>Profile</a>
+      <a><span class="i">⋯</span>More</a>
+    </nav>
+    <div class="post-btn">Post</div>
+    <div class="acct"><div class="av" style="background:#1a2a4a">🧢</div><div><b>Camille D. 🇫🇷</b><span>@CamilleDesmoulins</span></div><span style="margin-left:auto">···</span></div>
+  </aside>
+
+  <main class="center">
+    <div class="tabs"><div class="on">For you</div><div>Following</div><div>Third Estate</div></div>
+    <div class="compose">
+      <div class="av" style="background:#1a2a4a">🧢</div>
+      <div style="flex:1"><div class="t">What is happening?! (Everything. Everything is happening.)</div>
+      <div class="bar"><span>🖼️ &nbsp;GIF &nbsp;📊 &nbsp;😊 &nbsp;📅 &nbsp;📍</span><b>Post</b></div></div>
+    </div>
+    <div class="showmore">Show 1,789 posts</div>
+
+    <!-- Marie Antoinette -->
+    <article class="tw">
+      <div class="av" style="background:#f3c5d9">👸</div>
+      <div class="c">
+        <div class="hd"><b>Marie Antoinette</b><svg class="ck"><use href="#vg"/></svg><span>@QueenMA · 2h</span><span class="more">···</span></div>
+        <div class="tx">peasants: we have no bread 😭
+me: ok then let them eat brioche 🍰💅 problem solved bestie
+
+#Versailles #selfcare #queenthings</div>
+        <div class="cn"><div class="h">👥 Readers added context they thought people might want to know</div><p>There is no contemporary record of the Queen saying this. The phrase appears in Rousseau's <i>Confessions</i>, written when Marie Antoinette was about 9 years old and living in Austria. <a style="color:var(--blue)">gallica.bnf.fr/confessions-livre-vi</a></p><div class="f"><span style="color:var(--muted)">Do you find this helpful?</span><b>Rate it</b></div></div>
+        <div class="ac"><span>💬 48K</span><span class="rt">🔁 211K</span><span class="lk">♥ 9.4K</span><span>📊 88M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+
+    <!-- Louis XVI -->
+    <article class="tw">
+      <div class="av" style="background:#274a8a">🤴</div>
+      <div class="c">
+        <div class="hd"><b>Louis XVI</b><svg class="ck"><use href="#vg"/></svg><span>@RoiLouis · Jul 14</span><span class="more">···</span></div>
+        <div class="tx">Hunting diary, 14 July: Nothing. 🦌❌</div>
+        <div class="quote">
+          <div class="hd"><div class="av" style="width:20px;height:20px;font-size:11px;background:#8a1c1c">📰</div>&nbsp;<b>Breaking: Paris</b><svg class="ck"><use href="#vb"/></svg><span>@ParisBreaking · Jul 14</span></div>
+          <div style="margin-top:4px">🚨 JUST IN: Crowd of ~1,000 has stormed the Bastille. Governor de Launay captured. Seven prisoners freed. Developing…</div>
+        </div>
+        <div class="ac"><span>💬 102K</span><span class="rt">🔁 1.2M</span><span class="lk">♥ 4K</span><span>📊 211M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+
+    <!-- Guillotin thread -->
+    <article class="tw" style="border:0;padding-bottom:0">
+      <div class="thread"><div class="av" style="background:#e0e0e0">👨‍⚕️</div><div class="ln"></div></div>
+      <div class="c">
+        <div class="hd"><b>Dr. Joseph-Ignace Guillotin</b><svg class="ck"><use href="#vb"/></svg><span>@DrGuillotin · 6h</span><span class="more">···</span></div>
+        <div class="tx">I proposed a humane, egalitarian method of capital punishment to the Assembly today and people are already naming it after me??
+
+Please don't. I'm begging. 🧵 1/12</div>
+        <div class="media"><svg viewBox="0 0 520 280" width="520" height="280"><rect width="520" height="280" fill="#1c1a17"/><g stroke="#c9b48a" fill="none" stroke-width="2"><rect x="200" y="30" width="16" height="220"/><rect x="304" y="30" width="16" height="220"/><rect x="190" y="20" width="140" height="16"/><path d="M216 70 L304 90 L304 118 L216 118Z" fill="#8a8a8a" stroke="#ddd"/><rect x="180" y="200" width="160" height="30"/><circle cx="260" cy="216" r="10"/></g><g font-family="Inter" font-size="11" fill="#c9b48a"><text x="340" y="80">fig. 1 · angled blade</text><text x="340" y="96">(Louis XVI's suggestion!)</text><text x="340" y="220">fig. 2 · lunette</text><text x="16" y="264" fill="#8a7a5a">Technical drawing, Académie de Chirurgie · 1789</text></g></svg></div>
+        <div class="ac"><span>💬 12K</span><span class="rt">🔁 64K</span><span class="lk">♥ 30K</span><span>📊 22M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+    <article class="tw">
+      <div class="thread"><div class="av" style="background:#e0e0e0">👨‍⚕️</div></div>
+      <div class="c">
+        <div class="hd"><b>Dr. Joseph-Ignace Guillotin</b><svg class="ck"><use href="#vb"/></svg><span>@DrGuillotin · 6h</span></div>
+        <div class="tx">2/12 It's quick, it's the same for nobles and commoners, and honestly it's going to be used very sparingly. Mark my words. 🙏</div>
+        <div class="ac"><span>💬 3K</span><span class="rt">🔁 8K</span><span class="lk">♥ 11K</span><span>📊 9M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+
+    <!-- Robespierre poll -->
+    <article class="tw">
+      <div class="av" style="background:#3a5a3a">🧑‍⚖️</div>
+      <div class="c">
+        <div class="hd"><b>Maximilien Robespierre</b><span>@TheIncorruptible · 4h</span><span class="more">···</span></div>
+        <div class="tx">Quick poll for the Jacobin Club. Be honest, virtue is watching 👁️</div>
+        <div class="poll">
+          <div class="o w"><i style="width:71%"></i><span>Liberté</span><span>71%</span></div>
+          <div class="o"><i style="width:18%"></i><span>Égalité</span><span>18%</span></div>
+          <div class="o"><i style="width:9%"></i><span>Fraternité</span><span>9%</span></div>
+          <div class="o"><i style="width:2%"></i><span>Continue the monarchy</span><span>2%</span></div>
+          <div class="m">48,221 votes · Final results · Voters in last option have been noted</div>
+        </div>
+        <div class="ac"><span>💬 5.2K</span><span class="rt">🔁 19K</span><span class="lk">♥ 61K</span><span>📊 14M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+
+    <!-- Necker -->
+    <article class="tw">
+      <div class="av" style="background:#6a4a2a">💼</div>
+      <div class="c">
+        <div class="hd"><b>Jacques Necker</b><svg class="ck"><use href="#vb"/></svg><span>@FinanceMinisterNecker · 1d</span></div>
+        <div class="tx">Personal news: I have been fired. Again. Third time? Anyway the budget is still in deficit, don't @ me 📉</div>
+        <div class="ac"><span>💬 22K</span><span class="rt">🔁 150K</span><span class="lk">♥ 400K</span><span>📊 60M</span><span>🔖 ⤴</span></div>
+      </div>
+    </article>
+
+    <!-- Ad -->
+    <article class="tw">
+      <div class="av" style="background:#fff;color:#000;font-weight:800;font-size:13px">BAS</div>
+      <div class="c">
+        <div class="hd"><b>Bastille Salvage Co.</b><svg class="ck"><use href="#vg"/></svg><span>@PalloySouvenirs</span><span class="more">···</span></div>
+        <div class="tx">Own a piece of history! 🧱 Authentic stones from the Bastille, hand-carved into miniature Bastilles. Limited edition (we have many stones).</div>
+        <div class="ac"><span>💬 91</span><span class="rt">🔁 402</span><span class="lk">♥ 3K</span><span>📊 1M</span><span>🔖 ⤴</span></div>
+        <div class="ad" style="margin-top:8px">📣 Ad</div>
+      </div>
+    </article>
+  </main>
+
+  <aside class="right">
+    <div class="srch">🔍 Search</div>
+    <div class="box"><h3>Subscribe to Premium ⚜️</h3><p>Get a gold check, edit your manifestos, and skip the bread line. Nobles only.</p><span class="btn">Subscribe</span></div>
+    <div class="box">
+      <h3>What's happening</h3>
+      <div class="tr"><small>Politics · LIVE</small><b>National Constituent Assembly</b><span>Declaration of the Rights of Man drafting session</span></div>
+      <div class="tr"><small>Trending in Paris <span>···</span></small><b>#Bastille</b><span>1.8M posts</span></div>
+      <div class="tr"><small>Economy · Trending <span>···</span></small><b>Bread prices</b><span>Loaf now 14.5 sous · 612K posts</span></div>
+      <div class="tr"><small>Trending <span>···</span></small><b>Tennis Court Oath</b><span>Everyone who swore it is now very famous</span></div>
+      <div class="tr"><small>Fashion · Trending <span>···</span></small><b>#SansCulottes</b><span>The trousers trend explained</span></div>
+      <div class="showm">Show more</div>
+    </div>
+    <div class="box">
+      <h3>Who to follow</h3>
+      <div class="wtf"><div class="av" style="background:#1a3a6a">🎖️</div><div><b>Lafayette</b><span>@HeroOfTwoWorlds</span></div><span class="f">Follow</span></div>
+      <div class="wtf"><div class="av" style="background:#5a2a2a">🗞️</div><div><b>Jean-Paul Marat</b><span>@FriendOfThePeople</span></div><span class="f">Follow</span></div>
+      <div class="wtf"><div class="av" style="background:#2a2a2a">🎖️</div><div><b>Napoleone B.</b><span>@LieutenantOfArtillery</span></div><span class="f">Follow</span></div>
+      <div class="showm">Show more</div>
+    </div>
+    <div class="foot">Terms of Service · Privacy Policy · Cookie Policy · Accessibility · Ads info · More ··· © 1789 X Corp. Liberté.</div>
+  </aside>
+</div>
+</body>
+</html>

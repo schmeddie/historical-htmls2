@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cozy Longhouse w/ Fjord Views · Fjordbnb</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--text:#222;--muted:#6a6a6a;--line:#ddd;--brand:#ff385c;--brand2:#e61e4d}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,-apple-system,sans-serif;color:var(--text);background:#fff;font-size:16px;line-height:1.45}
+  header{height:80px;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 80px}
+  .logo{display:flex;align-items:center;gap:6px;color:var(--brand);font-weight:800;font-size:22px;letter-spacing:-.5px;width:300px}
+  .srch{margin:0 auto;display:flex;align-items:center;border:1px solid var(--line);border-radius:40px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);height:48px;padding:0 8px 0 24px;font-size:14px;font-weight:500}
+  .srch span{padding:0 16px;border-right:1px solid var(--line)}
+  .srch span:first-child{padding-left:0}
+  .srch span.g{color:var(--muted);font-weight:400;border:0}
+  .srch i{width:32px;height:32px;background:var(--brand);border-radius:50%;display:grid;place-items:center;color:#fff;font-style:normal;font-size:13px}
+  .hr{width:300px;display:flex;justify-content:flex-end;align-items:center;gap:14px;font-size:14px;font-weight:600}
+  .usr{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:40px;padding:5px 5px 5px 12px}
+  .usr b{width:30px;height:30px;background:#717171;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px}
+  main{width:1120px;margin:0 auto;padding-top:24px}
+  .ttl{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}
+  h1{font-size:26px;font-weight:600;letter-spacing:-.2px}
+  .ttl .a{display:flex;gap:18px;font-size:14px;font-weight:600;text-decoration:underline}
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:8px;border-radius:12px;overflow:hidden;position:relative}
+  .gallery div{overflow:hidden}
+  .gallery .big{grid-row:span 2}
+  .gallery svg{width:100%;height:100%;display:block}
+  .showall{position:absolute;right:24px;bottom:24px;background:#fff;border:1px solid #222;border-radius:8px;padding:6px 14px;font-size:14px;font-weight:600}
+  .body{display:grid;grid-template-columns:1fr 380px;gap:80px;margin-top:40px}
+  h2{font-size:22px;font-weight:600}
+  .sub{color:var(--text);margin-top:4px}
+  .fav{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:24px 0 0;gap:22px}
+  .fav .laurel{display:flex;align-items:center;gap:4px;font-weight:700;font-size:18px;text-align:center;line-height:1.1}
+  .fav .laurel span{font-size:28px}
+  .fav p{font-size:16px;font-weight:600;flex:1;border-left:0}
+  .fav p small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+  .fav .n{text-align:center;font-weight:700;font-size:22px;line-height:1}
+  .fav .n small{display:block;font-size:10px;font-weight:600;letter-spacing:.5px;margin-top:4px}
+  .fav .n + .n{border-left:1px solid var(--line);padding-left:22px}
+  .sect{border-bottom:1px solid var(--line);padding:32px 0}
+  .host{display:flex;gap:16px;align-items:center}
+  .hav{width:48px;height:48px;border-radius:50%;background:#c4a47a;display:grid;place-items:center;font-size:26px;position:relative}
+  .hav i{position:absolute;right:-4px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-style:normal;display:grid;place-items:center;border:2px solid #fff}
+  .host b{display:block;font-size:16px}
+  .host span{color:var(--muted);font-size:14px}
+  .hl{display:flex;gap:24px;margin-bottom:22px}
+  .hl .ic{font-size:26px;width:30px}
+  .hl b{display:block}
+  .hl span{color:var(--muted);font-size:14px}
+  .desc p{margin-bottom:12px}
+  .rooms{display:flex;gap:16px;margin-top:18px}
+  .room{border:1px solid var(--line);border-radius:12px;padding:22px;width:210px}
+  .room .i{font-size:26px;margin-bottom:12px}
+  .room b{display:block}
+  .room span{font-size:14px;color:var(--muted)}
+  .amen{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-top:22px}
+  .amen div{display:flex;gap:16px;align-items:center}
+  .amen .x{text-decoration:line-through;color:var(--muted)}
+  .btn2{border:1px solid #222;border-radius:8px;padding:12px 22px;font-weight:600;display:inline-block;margin-top:24px}
+  /* booking card */
+  .book{position:sticky;top:20px;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+  .book .pr{font-size:22px;font-weight:600}
+  .book .pr s{color:var(--muted);font-weight:400;font-size:18px;margin-right:4px}
+  .book .pr small{font-size:16px;font-weight:400}
+  .dates{border:1px solid #b0b0b0;border-radius:8px;margin:20px 0 16px}
+  .dates .r{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #b0b0b0}
+  .dates .r div{padding:10px 12px}
+  .dates .r div+div{border-left:1px solid #b0b0b0}
+  .dates small{display:block;font-size:10px;font-weight:800;letter-spacing:.3px}
+  .dates .g{padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+  .reserve{background:linear-gradient(to right,#e61e4d,#e31c5f,#d70466);color:#fff;text-align:center;border-radius:8px;padding:14px;font-weight:600;font-size:16px}
+  .nc{text-align:center;font-size:14px;margin:14px 0 20px}
+  .ln{display:flex;justify-content:space-between;margin-bottom:12px}
+  .ln span:first-child{text-decoration:underline}
+  .tot{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;font-weight:600}
+  .rare{border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin-top:24px;display:flex;gap:16px;align-items:center;font-size:15px}
+  .rare b{display:block}
+  /* reviews */
+  .score{text-align:center;padding:24px 0 8px}
+  .score .big{font-size:88px;font-weight:700;letter-spacing:-3px;line-height:1;display:flex;align-items:center;justify-content:center;gap:10px}
+  .score .big span{font-size:60px}
+  .score b{display:block;font-size:22px;margin-top:10px}
+  .score p{color:var(--muted);max-width:340px;margin:6px auto 0}
+  .cats{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:28px 0}
+  .cats div{padding:18px 14px;border-right:1px solid var(--line);font-size:14px}
+  .cats div:last-child{border:0}
+  .cats b{display:block;font-size:18px;margin:2px 0 14px}
+  .revs{display:grid;grid-template-columns:1fr 1fr;gap:40px 80px}
+  .rev .who{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+  .rev .who b{display:block}
+  .rev .who span{font-size:14px;color:var(--muted)}
+  .rev .st{font-size:12px;margin-bottom:6px}
+  .rev .st span{color:var(--muted);font-size:13px}
+  .map{height:360px;border-radius:12px;overflow:hidden;margin-top:22px;position:relative}
+  .map .pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(255,56,92,.2);display:grid;place-items:center}
+  .map .pin i{width:44px;height:44px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:22px;font-style:normal}
+  footer{background:#f7f7f7;border-top:1px solid var(--line);margin-top:48px;padding:32px 80px;font-size:14px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><svg width="30" height="32" viewBox="0 0 30 32"><path d="M15 2 L27 26 Q28 30 24 30 Q19 30 15 22 Q11 30 6 30 Q2 30 3 26 Z" fill="none" stroke="#ff385c" stroke-width="3" stroke-linejoin="round"/><path d="M8 12 h14 M15 2 v8" stroke="#ff385c" stroke-width="3" stroke-linecap="round"/></svg>fjordbnb</div>
+  <div class="srch"><span>Hordaland</span><span>Harvest Moon 3–10</span><span class="g">40 raiders</span><i>🔍</i></div>
+  <div class="hr"><span>Fjordbnb your longhouse</span><span>🌐</span><div class="usr">☰<b>🪓</b></div></div>
+</header>
+
+<main>
+  <div class="ttl"><h1>Cozy Longhouse w/ Fjord Views · Mead Hall &amp; Goats</h1><div class="a"><span>⤴ Share</span><span>♡ Save</span></div></div>
+  <div class="gallery">
+    <div class="big"><svg viewBox="0 0 560 408" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a5874"/><stop offset=".6" stop-color="#a4bfd0"/><stop offset="1" stop-color="#e6d8c0"/></linearGradient></defs>
+      <rect width="560" height="408" fill="url(#s)"/>
+      <path d="M0 200 L90 70 L170 190 L260 90 L360 200 L450 60 L560 180 V300 H0Z" fill="#445a6a"/>
+      <path d="M90 70 L110 100 L75 92Z M260 90 L280 118 L245 112Z M450 60 L472 92 L432 88Z" fill="#fff"/>
+      <path d="M0 250 Q280 230 560 250 V330 H0Z" fill="#5e8aa6"/>
+      <g stroke="#fff" opacity=".35"><path d="M60 270h60M200 280h80M380 268h70"/></g>
+      <path d="M0 320 Q200 290 560 318 V408 H0Z" fill="#4c6b3a"/>
+      <!-- longhouse -->
+      <path d="M150 330 Q280 250 410 330 L400 360 H160Z" fill="#6f8c3a"/>
+      <path d="M150 330 Q280 250 410 330" stroke="#3e5a22" stroke-width="3" fill="none"/>
+      <rect x="165" y="330" width="230" height="40" fill="#6b4524"/>
+      <g stroke="#4a2e16" stroke-width="2"><path d="M190 330v40M215 330v40M240 330v40M320 330v40M345 330v40M370 330v40"/></g>
+      <rect x="268" y="338" width="26" height="32" fill="#2a1a0c"/>
+      <path d="M150 330 l-10 -18 M410 330 l10 -18" stroke="#6b4524" stroke-width="5" stroke-linecap="round"/>
+      <path d="M140 312 q-8 -6 -2 -12 M420 312 q8 -6 2 -12" stroke="#6b4524" stroke-width="4" fill="none"/>
+      <path d="M300 280 q-6 -30 10 -50 q-12 30 4 50" fill="#ddd" opacity=".6"/>
+      <!-- longship -->
+      <g transform="translate(360 255)"><path d="M0 12 Q60 30 120 12 L128 -8 Q120 4 114 8 H6 Q0 4 -8 -8Z" fill="#5a3718"/><path d="M60 8 V-50" stroke="#3a2210" stroke-width="3"/><rect x="36" y="-46" width="48" height="36" fill="#c63a2c"/><path d="M36 -40 h48 M36 -28 h48 M36 -16 h48" stroke="#f5ead7" stroke-width="4"/><g fill="#d9b04a"><circle cx="20" cy="6" r="4"/><circle cx="36" cy="7" r="4"/><circle cx="52" cy="7" r="4"/><circle cx="68" cy="7" r="4"/><circle cx="84" cy="7" r="4"/><circle cx="100" cy="6" r="4"/></g></g>
+    </svg></div>
+    <div><svg viewBox="0 0 270 200" preserveAspectRatio="xMidYMid slice"><rect width="270" height="200" fill="#2a1a10"/><rect x="40" y="130" width="190" height="16" fill="#6b4524"/><path d="M135 130 q-24 -30 -4 -70 q6 30 20 20 q10 -30 -4 -50 q34 30 12 100z" fill="#ff9a2a"/><path d="M135 130 q-10 -20 0 -40 q10 20 6 40z" fill="#ffe27a"/><g fill="#6b4524"><rect x="20" y="40" width="10" height="160"/><rect x="240" y="40" width="10" height="160"/></g><g fill="#c9a24a"><circle cx="60" cy="60" r="16"/><circle cx="210" cy="60" r="16"/></g><circle cx="60" cy="60" r="6" fill="#8a6a2a"/><circle cx="210" cy="60" r="6" fill="#8a6a2a"/></svg></div>
+    <div><svg viewBox="0 0 270 200" preserveAspectRatio="xMidYMid slice"><rect width="270" height="200" fill="#d6c6a4"/><rect x="0" y="150" width="270" height="50" fill="#8a6a44"/><rect x="20" y="100" width="230" height="16" rx="3" fill="#6b4524"/><g font-size="30"><text x="30" y="98">🍖</text><text x="86" y="98">🍺</text><text x="130" y="98">🧀</text><text x="180" y="98">🐟</text></g><text x="24" y="40" font-size="28">🪓</text><text x="216" y="40" font-size="28">🛡️</text></svg></div>
+    <div><svg viewBox="0 0 270 200" preserveAspectRatio="xMidYMid slice"><rect width="270" height="200" fill="#bcd3c4"/><path d="M0 140 Q135 110 270 140 V200 H0Z" fill="#5f8a44"/><text x="70" y="160" font-size="60">🐐</text><text x="150" y="150" font-size="44">🐐</text><text x="20" y="60" font-size="34">☁️</text></svg></div>
+    <div><svg viewBox="0 0 270 200" preserveAspectRatio="xMidYMid slice"><rect width="270" height="200" fill="#0f1a2e"/><path d="M0 60 Q70 20 130 70 T270 40" stroke="#4be3a0" stroke-width="18" fill="none" opacity=".6"/><path d="M0 90 Q90 50 160 100 T270 70" stroke="#9b6bff" stroke-width="12" fill="none" opacity=".45"/><g fill="#fff"><circle cx="30" cy="20" r="1.5"/><circle cx="200" cy="120" r="1.5"/><circle cx="240" cy="18" r="1.5"/><circle cx="100" cy="130" r="1.5"/></g><path d="M0 170 L60 130 L120 170 L190 120 L270 170 V200 H0Z" fill="#050a14"/></svg></div>
+    <span class="showall">⋮⋮ Show all runestones</span>
+  </div>
+
+  <div class="body">
+    <div>
+      <div class="sect" style="padding-top:0">
+        <h2>Entire longhouse in Hordaland, Norway</h2>
+        <div class="sub">40 guests · 1 hall · 1 bench (very long) · 0 baths · 1 fjord</div>
+        <div class="fav">
+          <div class="laurel"><span>🌿</span>Guest<br>favourite<span style="transform:scaleX(-1)">🌿</span></div>
+          <p>One of the most loved homes on Fjordbnb, according to raiders<small>Also feared by 11 monasteries</small></p>
+          <div class="n">4.96<small>★★★★★</small></div>
+          <div class="n">412<small>Reviews</small></div>
+        </div>
+      </div>
+      <div class="sect host"><div class="hav">🧔<i>🛡</i></div><div><b>Hosted by Ragnar</b><span>Superhost · 12 years raiding hosting</span></div></div>
+      <div class="sect">
+        <div class="hl"><div class="ic">🔥</div><div><b>Always-on hearth</b><span>The central fire has not gone out since 871. Please do not be the one.</span></div></div>
+        <div class="hl"><div class="ic">🛶</div><div><b>Free parking — for longships</b><span>Beach your vessel right outside. Up to 3 ships, no dragon heads facing the house.</span></div></div>
+        <div class="hl" style="margin:0"><div class="ic">📜</div><div><b>Flexible cancellation</b><span>Free cancellation before your saga begins. After that, the Norns decide.</span></div></div>
+      </div>
+      <div class="sect desc">
+        <p>Skál! Welcome to our family longhouse on the edge of the Hardangerfjord. Wake up to goats on the roof (literally — it's turf), spend your day fishing, feasting or planning a trip "west" with the lads, then fall asleep on our 30-metre communal sleeping bench under a blanket of genuine wolf fur.</p>
+        <p>Perfect for large groups, stag weekends, and anyone headed to Lindisfarne. We provide axes. You provide your own helmet (please note: <b>no horns</b> — that's a 19th-century opera thing and the neighbours will laugh).</p>
+        <span style="font-weight:600;text-decoration:underline">Show more ›</span>
+      </div>
+      <div class="sect">
+        <h2>Where you'll sleep</h2>
+        <div class="rooms">
+          <div class="room"><div class="i">🛏️🛏️🛏️</div><b>The Great Hall</b><span>1 bench for 38, 1 pile of furs</span></div>
+          <div class="room"><div class="i">🐑</div><b>The Byre</b><span>2 sheep beds (sheep included)</span></div>
+          <div class="room"><div class="i">⚰️</div><b>The Burial Mound</b><span>Sleeps 1, permanently</span></div>
+        </div>
+      </div>
+      <div class="sect">
+        <h2>What this place offers</h2>
+        <div class="amen">
+          <div>🔥 Central hearth</div><div>🍺 Free mead (bottomless horn)</div>
+          <div>🐐 Goats on premises</div><div>⚔️ Dedicated weapon storage</div>
+          <div>🧖 Sauna (sweat hut)</div><div>🪶 Resident skald (sings nightly, won't stop)</div>
+          <div>🐺 Pets allowed (wolves only)</div><div>🗿 Runestone for messages</div>
+          <div class="x">📶 Wifi</div><div class="x">🛁 Bath (it's Saturday-only, per Norse custom)</div>
+        </div>
+        <span class="btn2">Show all 64 amenities</span>
+      </div>
+    </div>
+
+    <aside>
+      <div class="book">
+        <div class="pr"><s>18</s>14 silver <small>ingots per night</small></div>
+        <div class="dates">
+          <div class="r"><div><small>CHECK-IN</small>3 Harvest</div><div><small>CHECKOUT</small>10 Harvest</div></div>
+          <div class="g"><div><small>GUESTS</small>40 raiders, 2 skalds</div>⌄</div>
+        </div>
+        <div class="reserve">Reserve</div>
+        <div class="nc">You won't be charged yet (plunder later)</div>
+        <div class="ln"><span>14 ingots × 7 nights</span><span>98 ingots</span></div>
+        <div class="ln"><span>Pillage cleanup fee</span><span>12 ingots</span></div>
+        <div class="ln"><span>Fjordbnb service fee</span><span>16 ingots</span></div>
+        <div class="ln"><span>Danegeld (local tax)</span><span>6 ingots</span></div>
+        <div class="tot"><span>Total before tributes</span><span>132 silver ingots</span></div>
+      </div>
+      <div class="rare">💎<div><b>This is a rare find.</b>Ragnar's place is usually booked — or burning.</div></div>
+    </aside>
+  </div>
+
+  <div class="sect">
+    <div class="score"><div class="big"><span>🌿</span>4.96<span style="transform:scaleX(-1)">🌿</span></div><b>Guest favourite</b><p>One of the most loved homes on Fjordbnb based on ratings, reviews, and survival</p></div>
+    <div class="cats">
+      <div>Cleanliness<b>4.4</b>🧹</div><div>Accuracy<b>5.0</b>✅</div><div>Check-in<b>4.9</b>🔑</div><div>Communication<b>4.8</b>🗿</div><div>Location<b>5.0</b>🗺️</div><div>Plunder value<b>4.9</b>🏷️</div>
+    </div>
+    <div class="revs">
+      <div class="rev"><div class="who"><div class="hav" style="width:40px;height:40px;font-size:22px">🧝‍♀️</div><div><b>Freydís</b><span>Greenland · 6 years on Fjordbnb</span></div></div><div class="st">★★★★★ · <span>2 weeks ago · Stayed with a group</span></div>The mead horn never runs dry and Ragnar's wife Lagertha is an absolute legend. Only complaint: the skald sang all 94 verses of the Völuspá. Twice.</div>
+      <div class="rev"><div class="who"><div class="hav" style="width:40px;height:40px;font-size:22px">🧔‍♂️</div><div><b>Leif</b><span>Iceland · Explorer</span></div></div><div class="st">★★★★★ · <span>1 month ago · Stayed a few nights</span></div>Great base before heading west. Ragnar gave amazing local tips. Found a whole new continent afterwards. Nobody believes me.</div>
+      <div class="rev"><div class="who"><div class="hav" style="width:40px;height:40px;font-size:22px">🧑‍🦲</div><div><b>Brother Cuthbert</b><span>Lindisfarne, Northumbria</span></div></div><div class="st">★☆☆☆☆ · <span>June 793 · Did not stay</span></div>I did not book this. The host came to MY place first. Took all the silver and the altar cloth. Please remove this listing. <br><i style="color:var(--muted);font-size:14px">Response from Ragnar: We had a great time too! Door's always open 🪓</i></div>
+      <div class="rev"><div class="who"><div class="hav" style="width:40px;height:40px;font-size:22px">👑</div><div><b>Alfred</b><span>Wessex · Verified</span></div></div><div class="st">★★★☆☆ · <span>3 months ago · Business trip</span></div>Nice place. Burnt the cakes in the kitchen, which the host was surprisingly cool about. Negotiations over the border went fine. Would treaty again.</div>
+    </div>
+  </div>
+  <div class="sect" style="border:0">
+    <h2>Where you'll be</h2>
+    <div class="sub">Hardangerfjord, Hordaland, Norway (Midgard)</div>
+    <div class="map"><svg width="100%" height="100%" viewBox="0 0 1120 360" preserveAspectRatio="xMidYMid slice"><rect width="1120" height="360" fill="#aad3df"/><path d="M0 0 H1120 V120 Q1000 150 900 120 Q820 180 700 150 Q640 210 560 180 Q500 230 420 200 Q330 260 250 230 Q150 280 0 250Z" fill="#e7e2d4"/><path d="M0 360 H1120 V260 Q1000 230 880 260 Q780 210 660 250 Q600 220 560 240 Q470 210 380 250 Q260 220 150 290 Q60 300 0 300Z" fill="#e7e2d4"/><g fill="#c9dcb4"><ellipse cx="200" cy="80" rx="120" ry="40"/><ellipse cx="900" cy="320" rx="140" ry="30"/><ellipse cx="760" cy="60" rx="90" ry="30"/></g><g font-family="Inter" font-size="12" fill="#6b6b6b"><text x="480" y="220" fill="#3d7a9a">Hardangerfjord</text><text x="150" y="60">Jotunheim (ask before visiting)</text><text x="820" y="340">To Lindisfarne ↘</text></g></svg><div class="pin"><i>🏠</i></div></div>
+  </div>
+</main>
+<footer><span>© 893 Fjordbnb, Hf. · Privacy · Terms · Sitemap · Company details</span><span>🌐 Old Norse (ᚠᚢᚦᛅᚱᚴ) · ᛋ Silver</span></footer>
+</body>
+</html>

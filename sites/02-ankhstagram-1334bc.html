@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankhstagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Noto+Sans+Egyptian+Hieroglyphs&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--text:#0c1014;--muted:#737373;--line:#dbdbdb;--blue:#0095f6;--bg:#fff;--grad:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,-apple-system,Segoe UI,sans-serif;color:var(--text);background:var(--bg);font-size:14px}
+  .app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+  /* sidebar */
+  .side{border-right:1px solid var(--line);padding:26px 12px 20px;position:relative;height:100%}
+  .brand{font-family:'Grand Hotel',cursive;font-size:32px;padding:0 12px 26px;display:flex;align-items:center;gap:8px}
+  .nav a{display:flex;align-items:center;gap:16px;padding:12px;border-radius:8px;font-size:16px;color:var(--text);text-decoration:none;margin-bottom:2px}
+  .nav a.on{font-weight:700}
+  .nav a:hover{background:#f2f2f2}
+  .nav .ic{width:26px;height:26px;display:grid;place-items:center;font-size:22px;position:relative}
+  .nav .dot{position:absolute;top:-4px;right:-6px;background:#ff3040;color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:1px 5px;border:2px solid #fff}
+  .nav .me{width:26px;height:26px;border-radius:50%;background:#e7c98a;display:grid;place-items:center;font-size:16px;border:2px solid #000}
+  .side .more{position:absolute;bottom:24px;left:12px;right:12px}
+  /* main */
+  .main{display:grid;grid-template-columns:630px 320px;gap:64px;justify-content:center;padding-top:22px}
+  .stories{display:flex;gap:14px;padding:8px 0 22px;overflow:hidden}
+  .story{width:70px;text-align:center;font-size:12px;flex-shrink:0}
+  .ring{width:66px;height:66px;border-radius:50%;background:var(--grad);padding:2.5px;margin:0 auto 4px}
+  .ring.seen{background:#dbdbdb}
+  .ring .in{width:100%;height:100%;border-radius:50%;border:3px solid #fff;display:grid;place-items:center;font-size:30px;background:#f3e6c4;overflow:hidden}
+  .story span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .feed{width:470px;margin:0 auto}
+  .post{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+  .ph{display:flex;align-items:center;gap:10px;padding:0 0 12px}
+  .av{width:34px;height:34px;border-radius:50%;background:var(--grad);padding:2px}
+  .av div{width:100%;height:100%;border-radius:50%;border:2px solid #fff;background:#f3e6c4;display:grid;place-items:center;font-size:17px}
+  .ph b{font-weight:600}
+  .ph .v{color:var(--blue);font-size:12px}
+  .ph .loc{font-size:12px;display:block;color:var(--text)}
+  .ph .time{color:var(--muted)}
+  .ph .dots{margin-left:auto;font-size:18px;letter-spacing:1px}
+  .media{border-radius:4px;overflow:hidden;border:1px solid #efefef;position:relative}
+  .media .count{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;padding:3px 8px;border-radius:12px}
+  .media .pager{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:4px}
+  .media .pager i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5)}
+  .media .pager i.on{background:#fff}
+  .acts{display:flex;gap:16px;padding:12px 0 8px;align-items:center}
+  .acts svg{width:24px;height:24px}
+  .acts .save{margin-left:auto}
+  .likes{font-weight:600;margin-bottom:6px}
+  .cap{line-height:1.45}
+  .cap b{font-weight:600;margin-right:4px}
+  .tag{color:#00376b}
+  .viewc{color:var(--muted);margin:6px 0}
+  .cm{margin:3px 0}
+  .cm b{font-weight:600;margin-right:4px}
+  .add{color:var(--muted);margin-top:8px;display:flex;justify-content:space-between}
+  .note{background:#fafafa;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:13px;color:#333}
+  .note b{font-weight:600}
+  /* right */
+  .right{padding-top:30px;font-size:14px}
+  .me-row,.sug{display:flex;align-items:center;gap:12px}
+  .me-row{margin-bottom:24px}
+  .bigav{width:44px;height:44px;border-radius:50%;background:#f3e6c4;display:grid;place-items:center;font-size:24px}
+  .me-row .n b,.sug .n b{font-weight:600;display:block}
+  .n span{color:var(--muted);font-size:12px;display:block}
+  .switch{margin-left:auto;color:var(--blue);font-weight:600;font-size:12px}
+  .sug-h{display:flex;justify-content:space-between;color:var(--muted);font-weight:600;margin-bottom:14px}
+  .sug-h b{color:var(--text);font-size:12px}
+  .sug{margin-bottom:14px}
+  .sug .bigav{width:44px;height:44px}
+  .foot{color:#c7c7c7;font-size:12px;line-height:1.7;margin-top:30px}
+  .foot p{margin-top:14px}
+  .reelbadge{position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:4px 8px;border-radius:12px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <svg width="26" height="30" viewBox="0 0 26 30"><defs><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#f9ce34"/><stop offset=".5" stop-color="#ee2a7b"/><stop offset="1" stop-color="#6228d7"/></linearGradient></defs><ellipse cx="13" cy="8" rx="6" ry="7" stroke="url(#g)" stroke-width="3" fill="none"/><path d="M13 15v14M3 16h20" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round"/></svg>
+      Ankhstagram
+    </div>
+    <nav class="nav">
+      <a class="on"><span class="ic">🏛️</span>Home</a>
+      <a><span class="ic">🔍</span>Search</a>
+      <a><span class="ic">🧭</span>Explore the Nile</a>
+      <a><span class="ic">🎞️</span>Scrolls</a>
+      <a><span class="ic">📜<span class="dot">7</span></span>Papyri</a>
+      <a><span class="ic">🤍</span>Notifications</a>
+      <a><span class="ic">🪨</span>Carve</a>
+      <a><span class="ic"><span class="me">👁️</span></span>Profile</a>
+    </nav>
+    <nav class="nav more">
+      <a><span class="ic">🌀</span>Also from Ra</a>
+      <a><span class="ic">☰</span>More</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <div>
+      <div class="stories">
+        <div class="story"><div class="ring"><div class="in">👑</div></div><span>tutankhamun</span></div>
+        <div class="story"><div class="ring"><div class="in">🐺</div></div><span>anubis.official</span></div>
+        <div class="story"><div class="ring"><div class="in">🐈</div></div><span>bastet_daily</span></div>
+        <div class="story"><div class="ring"><div class="in">🐊</div></div><span>sobek_nile_tours</span></div>
+        <div class="story"><div class="ring"><div class="in">🏗️</div></div><span>imhotep.archive</span></div>
+        <div class="story"><div class="ring"><div class="in">🦁</div></div><span>the_sphinx</span></div>
+        <div class="story"><div class="ring seen"><div class="in">🐍</div></div><span>apep_unfiltered</span></div>
+        <div class="story"><div class="ring seen"><div class="in">🪲</div></div><span>khepri.mornings</span></div>
+      </div>
+
+      <div class="feed">
+        <!-- Post 1 -->
+        <article class="post">
+          <div class="ph">
+            <div class="av"><div>👸</div></div>
+            <div><b>nefertiti</b> <span class="v">✔︎</span> <span class="time">• 2h</span><span class="loc">Giza Plateau, Lower Egypt</span></div>
+            <span class="dots">···</span>
+          </div>
+          <div class="media">
+            <svg viewBox="0 0 470 540" width="470" height="540" style="display:block">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2a6b"/><stop offset=".45" stop-color="#e2677a"/><stop offset=".75" stop-color="#ffb35c"/><stop offset="1" stop-color="#ffd98a"/></linearGradient>
+                <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d59a52"/><stop offset="1" stop-color="#8e5a2b"/></linearGradient>
+                <linearGradient id="pyrL" x1="0" x2="1"><stop offset="0" stop-color="#f4c77f"/><stop offset="1" stop-color="#e2a55b"/></linearGradient>
+                <linearGradient id="pyrR" x1="0" x2="1"><stop offset="0" stop-color="#a86a35"/><stop offset="1" stop-color="#7e4a22"/></linearGradient>
+                <radialGradient id="sun"><stop offset="0" stop-color="#fff6d0"/><stop offset=".5" stop-color="#ffd166"/><stop offset="1" stop-color="#ffd166" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect width="470" height="540" fill="url(#sky)"/>
+              <circle cx="300" cy="300" r="120" fill="url(#sun)"/>
+              <circle cx="300" cy="300" r="42" fill="#fff1c1"/>
+              <g fill="#3b2a6b" opacity=".5"><path d="M60 110 q8 -6 16 0 q8 -6 16 0" stroke="#3b2a6b" stroke-width="2" fill="none"/><path d="M110 80 q6 -5 12 0 q6 -5 12 0" stroke="#3b2a6b" stroke-width="2" fill="none"/></g>
+              <!-- far pyramid -->
+              <path d="M330 380 L395 300 L460 380 Z" fill="#c68a4a" opacity=".85"/><path d="M395 300 L460 380 L420 380 Z" fill="#8e5a2b" opacity=".85"/>
+              <!-- big pyramid -->
+              <path d="M40 390 L200 180 L360 390 Z" fill="url(#pyrL)"/>
+              <path d="M200 180 L360 390 L262 390 Z" fill="url(#pyrR)"/>
+              <path d="M200 180 L214 198 L186 198 Z" fill="#fff4c8"/>
+              <g stroke="#b07a3e" stroke-width="1" opacity=".5"><path d="M86 330H320M110 300H296M133 270H273M156 240H250M178 210H226"/></g>
+              <!-- dunes -->
+              <path d="M0 390 Q120 360 240 392 T470 380 V540 H0 Z" fill="url(#sand)"/>
+              <path d="M0 450 Q160 420 300 460 T470 450 V540 H0 Z" fill="#7b4a22" opacity=".55"/>
+              <!-- camels silhouette -->
+              <g fill="#3a1f0e">
+                <path d="M70 430 q6-16 18-10 q6-14 16-2 q10 0 12 8 l6-10 4 4 -4 10 v18 h-4 v-14 h-26 v14 h-4 v-14 q-10-2-18-4z"/>
+                <path d="M130 440 q5-12 14-8 q5-10 12-1 q8 0 9 6 l5-8 3 3 -3 8 v14 h-3 v-11 h-20 v11 h-3 v-11 q-8-1-14-3z"/>
+              </g>
+              <!-- figure -->
+              <g transform="translate(360 395)">
+                <path d="M0 0 l-14 80 h28 z" fill="#f7efe0"/>
+                <circle cx="0" cy="-10" r="10" fill="#8a5a3a"/>
+                <path d="M-10 -22 h20 l-3 -18 h-14 z" fill="#2f5fa8"/>
+                <rect x="-11" y="-24" width="22" height="4" fill="#e8b93c"/>
+                <path d="M-12 2 q12 8 24 0" stroke="#e8b93c" stroke-width="4" fill="none"/>
+              </g>
+            </svg>
+            <span class="count">1/6</span>
+            <div class="pager"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="acts">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z" fill="#ff3040"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M20.7 17.3A9.5 9.5 0 1 0 17 20.6L22 22z" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M22 3 9.2 10.1M22 3l-7 18-4.9-9.3L2 10z" stroke-linejoin="round"/></svg>
+            <svg class="save" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M20 21 12 14.4 4 21V3h16z" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="likes">Liked by <b>ra_official</b> and 1,204,588 subjects</div>
+          <div class="cap"><b>nefertiti</b>golden hour at the family's newest build 🌅 3,000 yrs of shade guaranteed. swipe for the obelisk dump 👉 <span class="tag">#nofilter #pyramidlife #bustgoals #queenofthenile #sponsored @kohl_by_hathor</span></div>
+          <div class="note"><b>ⓘ Context from scribes:</b> This pyramid was built ~1,200 years before the poster was born. "Newest build" is misleading. <span style="color:var(--muted)">· Rate it</span></div>
+          <div class="viewc">View all 88,412 comments</div>
+          <div class="cm"><b>tutankhamun</b>stepmom goals fr 🔥🔥</div>
+          <div class="cm"><b>scribe_of_thebes</b>this is carved into my heart (and also this wall)</div>
+          <div class="cm"><b>akhenaten</b>🌞🌞🌞 tag the only god that matters</div>
+          <div class="add"><span>Add a comment…</span><span>☺</span></div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="post">
+          <div class="ph">
+            <div class="av"><div>🐺</div></div>
+            <div><b>anubis.official</b> <span class="v">✔︎</span> <span class="time">• 5h</span><span class="loc">Hall of Two Truths · Paid partnership with <b>featherscales.co</b></span></div>
+            <span class="dots">···</span>
+          </div>
+          <div class="media">
+            <svg viewBox="0 0 470 470" width="470" height="470" style="display:block">
+              <rect width="470" height="470" fill="#1e1a2e"/>
+              <g opacity=".14" fill="#f0c86b" font-size="26" font-family="Noto Sans Egyptian Hieroglyphs">
+                <text x="20" y="40">𓀀 𓁐 𓂀 𓃠 𓆣 𓇳 𓊹 𓋹 𓌙 𓍝</text><text x="10" y="440">𓏏 𓐍 𓆓 𓅓 𓄿 𓂝 𓇋 𓎛 𓊪 𓈖</text>
+              </g>
+              <!-- scale -->
+              <rect x="229" y="120" width="12" height="260" fill="#e8b93c"/>
+              <rect x="190" y="370" width="90" height="16" rx="3" fill="#c99a2a"/>
+              <path d="M110 150 L360 150" stroke="#e8b93c" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="235" cy="118" r="14" fill="#e8b93c"/>
+              <path d="M130 150 l-40 110 M130 150 l40 110 M340 150 l-40 110 M340 150 l40 110" stroke="#c99a2a" stroke-width="2"/>
+              <path d="M80 262 q50 30 100 0 z" fill="#e8b93c"/><path d="M290 262 q50 30 100 0 z" fill="#e8b93c"/>
+              <!-- heart -->
+              <path d="M130 258 c-18-18-26 4-8 14 l8 8 8-8 c18-10 10-32-8-14z" fill="#c2334d" transform="translate(0 -18)"/>
+              <!-- feather -->
+              <path d="M340 256 q-6-40 10-78 q10 40 -4 78 z" fill="#f4f1e8"/><path d="M345 256 v-76" stroke="#c9c2ad" stroke-width="1.5"/>
+              <text x="235" y="438" text-anchor="middle" fill="#f0c86b" font-family="Inter" font-weight="700" font-size="20" letter-spacing="3">WEIGH-IN WEDNESDAY</text>
+            </svg>
+            <span class="reelbadge">▶ Scroll · 4.2M views</span>
+          </div>
+          <div class="acts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.8-8 11-8 11z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M20.7 17.3A9.5 9.5 0 1 0 17 20.6L22 22z" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M22 3 9.2 10.1M22 3l-7 18-4.9-9.3L2 10z" stroke-linejoin="round"/></svg>
+            <svg class="save" viewBox="0 0 24 24"><path d="M20 21 12 14.4 4 21V3h16z" fill="#000"/></svg>
+          </div>
+          <div class="likes">644,019 likes</div>
+          <div class="cap"><b>anubis.official</b>POV: you told everyone you were "a good person" and now it's feather time 🪶⚖️ Tag someone whose heart is NOT making it. Ammit is hungry 🐊🦁🦛 <span class="tag">#afterlife #weighin #judgementday #heartcheck</span></div>
+          <div class="viewc">View all 31,977 comments</div>
+          <div class="cm"><b>osiris</b>my guy is SO good at his job</div>
+          <div class="cm"><b>ammit_eats</b>👀🍽️</div>
+          <div class="cm"><b>random_farmer_4471</b>asking for a friend, does beer count as a sin</div>
+          <div class="add"><span>Add a comment…</span><span>☺</span></div>
+        </article>
+      </div>
+    </div>
+
+    <aside class="right">
+      <div class="me-row">
+        <div class="bigav">🧑‍🎨</div>
+        <div class="n"><b>thutmose_sculpts</b><span>Thutmose · Royal Sculptor</span></div>
+        <span class="switch">Switch</span>
+      </div>
+      <div class="sug-h">Suggested for you <b>See All</b></div>
+      <div class="sug"><div class="bigav">🌊</div><div class="n"><b>hapi_floodwatch</b><span>Followed by farmers_of_faiyum + 40</span></div><span class="switch">Follow</span></div>
+      <div class="sug"><div class="bigav">🐫</div><div class="n"><b>punt_imports</b><span>Suggested for you · Incense &amp; giraffes</span></div><span class="switch">Follow</span></div>
+      <div class="sug"><div class="bigav">🧔🏽</div><div class="n"><b>moses</b><span>New to Ankhstagram</span></div><span class="switch">Follow</span></div>
+      <div class="sug"><div class="bigav">🐸</div><div class="n"><b>heqet_frogs</b><span>Followed by moses</span></div><span class="switch">Follow</span></div>
+      <div class="sug"><div class="bigav">📐</div><div class="n"><b>overseer_of_works</b><span>Hiring: 20,000 volunteers*</span></div><span class="switch">Follow</span></div>
+      <div class="foot">
+        About · Help · Press · Papyrus API · Jobs · Privacy · Terms · Locations · Language · Ankhstagram Verified (1 ox/month)
+        <p>© 1334 BC ANKHSTAGRAM FROM THE HOUSE OF RA</p>
+      </div>
+    </aside>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feed | LinkedIron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f2ee;--card:#fff;--line:#e0dfdc;--text:rgba(0,0,0,.9);--muted:rgba(0,0,0,.6);--blue:#0a66c2;--green:#057642;--sepia:#e9dfc8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+  header{background:#fff;border-bottom:1px solid var(--line);height:52px}
+  .hin{width:1128px;margin:0 auto;display:flex;align-items:center;height:100%;gap:8px}
+  .logo{width:34px;height:34px;background:#3d3f42;border-radius:4px;color:#fff;font-weight:800;display:grid;place-items:center;font-size:19px;letter-spacing:-1px;background-image:linear-gradient(135deg,#5b5e62,#2b2d30)}
+  .search{background:#edf3f8;border-radius:4px;height:34px;width:280px;display:flex;align-items:center;gap:8px;padding:0 10px;color:var(--muted)}
+  .hnav{margin-left:auto;display:flex;height:100%}
+  .hnav a{padding:0 12px;white-space:nowrap;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:var(--muted);position:relative}
+  .hnav a .i{font-size:20px;line-height:1}
+  .hnav a.on{color:var(--text);box-shadow:inset 0 -2px 0 var(--text)}
+  .hnav .badge{position:absolute;top:4px;right:calc(50% - 20px);background:#cb112d;color:#fff;border-radius:10px;font-size:11px;padding:0 5px;font-weight:600}
+  .hnav .sep{border-left:1px solid var(--line);margin:0 4px}
+  .hnav .prem{color:#915907;text-align:center;font-size:12px;width:120px;text-decoration:underline;align-self:center;line-height:1.3}
+  .wrap{width:1128px;margin:24px auto;display:grid;grid-template-columns:225px 555px 300px;gap:24px;align-items:start}
+  .card{background:var(--card);border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08);overflow:hidden;margin-bottom:10px}
+  /* profile */
+  .cover{height:58px;background:linear-gradient(120deg,#7a6a52,#b7a07a 45%,#6f7b82);position:relative}
+  .cover:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 22px,rgba(0,0,0,.08) 22px 24px)}
+  .pav{width:72px;height:72px;border-radius:50%;border:2px solid #fff;margin:-36px auto 0;position:relative;z-index:1;background:var(--sepia);display:grid;place-items:center;overflow:hidden}
+  .pinfo{text-align:center;padding:12px 12px 16px;border-bottom:1px solid var(--line)}
+  .pinfo b{font-size:16px}
+  .pinfo p{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35}
+  .stat{display:flex;justify-content:space-between;padding:6px 12px;font-size:12px;color:var(--muted);font-weight:600}
+  .stat span{color:var(--blue)}
+  .pstat{padding:8px 0;border-bottom:1px solid var(--line)}
+  .premium{padding:12px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line)}
+  .premium b{color:var(--text);display:block;margin-top:2px}
+  .items{padding:12px;font-size:12px;font-weight:600}
+  .side2{padding:12px;font-size:12px}
+  .side2 h5{color:var(--blue);font-size:12px;margin:8px 0 6px}
+  .side2 div{padding:4px 0;color:var(--muted);font-weight:600}
+  /* composer */
+  .comp{padding:12px 16px}
+  .comp .r1{display:flex;gap:8px}
+  .sav{width:48px;height:48px;border-radius:50%;background:var(--sepia);flex-shrink:0;display:grid;place-items:center;overflow:hidden}
+  .comp .inp{flex:1;border:1px solid #8c8c8c;border-radius:35px;display:flex;align-items:center;padding:0 16px;font-weight:600;color:var(--muted)}
+  .comp .r2{display:flex;justify-content:space-around;margin-top:8px;font-weight:600;color:var(--muted)}
+  .comp .r2 span{padding:10px 8px;display:flex;gap:8px;align-items:center}
+  .sort{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:12px;color:var(--muted)}
+  .sort hr{flex:1;border:0;border-top:1px solid #c9c8c4}
+  .sort b{color:var(--text)}
+  /* posts */
+  .ctx{padding:8px 16px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .ph{display:flex;gap:8px;padding:12px 16px 0}
+  .ph .n b{font-weight:600}
+  .ph .n .deg{color:var(--muted);font-weight:400}
+  .ph .n p{font-size:12px;color:var(--muted);line-height:1.3}
+  .ph .follow{margin-left:auto;color:var(--blue);font-weight:600;white-space:nowrap}
+  .body{padding:8px 16px 8px;line-height:1.45}
+  .body p+p{margin-top:8px}
+  .body .ht{color:var(--blue);font-weight:600}
+  .more{color:var(--muted)}
+  .img{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--sepia)}
+  .img svg{display:block}
+  .soc{display:flex;justify-content:space-between;padding:8px 16px;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);margin:0 0}
+  .rx{display:inline-flex;margin-right:4px;vertical-align:middle}
+  .rx i{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-style:normal;border:1px solid #fff;margin-right:-4px}
+  .acts{display:flex;justify-content:space-around;padding:4px 8px;font-weight:600;color:var(--muted)}
+  .acts span{padding:12px 8px;display:flex;gap:6px;align-items:center}
+  .job{border:1px solid var(--line);margin:4px 16px 12px;border-radius:8px;display:flex;gap:12px;padding:12px;align-items:center}
+  .job .lg{width:56px;height:56px;background:#2d2a24;color:#e9d79b;display:grid;place-items:center;font-family:'Libre Caslon Text',serif;font-weight:700;font-size:22px;border-radius:4px}
+  .job b{display:block}
+  .job span{font-size:12px;color:var(--muted);display:block}
+  .job .easy{margin-left:auto;background:var(--blue);color:#fff;border-radius:100px;padding:6px 16px;font-weight:600;white-space:nowrap}
+  .otw{position:relative}
+  .otw:after{content:"";position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#57a75b;border-left-color:#57a75b;border-bottom-color:#57a75b;transform:rotate(-30deg)}
+  .otwtag{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);background:#57a75b;color:#fff;font-size:7px;font-weight:700;padding:1px 3px;border-radius:3px;white-space:nowrap}
+  /* right */
+  .news{padding:12px 0}
+  .news h3{font-size:16px;padding:0 16px 4px;display:flex;justify-content:space-between}
+  .news .sub{font-size:14px;color:var(--muted);padding:0 16px 8px;font-weight:600}
+  .news li{list-style:none;padding:6px 16px}
+  .news li b{font-weight:600;font-size:14px;display:block}
+  .news li span{font-size:12px;color:var(--muted)}
+  .puzz{padding:12px 16px;border-top:1px solid var(--line)}
+  .ad{text-align:center;padding:16px;font-size:12px;color:var(--muted)}
+  .ad .adimg{display:flex;justify-content:center;gap:10px;margin:14px 0}
+  .ad .c{width:64px;height:64px;border-radius:50%;background:var(--sepia);display:grid;place-items:center;font-size:30px}
+  .ad p{color:var(--text);font-size:14px;margin-bottom:12px}
+  .ad .btn{border:1px solid var(--blue);color:var(--blue);border-radius:100px;padding:6px 16px;font-weight:600;display:inline-block}
+  .foot{font-size:12px;color:var(--muted);text-align:center;line-height:2;padding:0 10px}
+  .foot b{color:var(--blue)}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="logo">in</div>
+  <div class="search">🔍 Search by trade, guild, or parish</div>
+  <nav class="hnav">
+    <a class="on"><span class="i">🏠</span>Home</a>
+    <a><span class="i">👥</span>Network</a>
+    <a><span class="i">💼</span>Situations</a>
+    <a><span class="i">✉️</span>Telegraphs<span class="badge">3</span></a>
+    <a><span class="i">🔔</span>Notices<span class="badge">12</span></a>
+    <a><span class="i">🎩</span>Me ▾</a>
+    <span class="sep"></span>
+    <a><span class="i">⚙️</span>For Factories ▾</a>
+    <span class="prem">Try Premium for 0 shillings</span>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <aside>
+    <div class="card">
+      <div class="cover"></div>
+      <div class="pav"><svg width="72" height="72" viewBox="0 0 72 72"><rect width="72" height="72" fill="#e9dfc8"/><rect x="22" y="-4" width="28" height="30" fill="#1d1b18"/><rect x="14" y="22" width="44" height="5" fill="#1d1b18"/><ellipse cx="36" cy="38" rx="11" ry="13" fill="#d9b48f"/><path d="M14 72 q4-20 22-22 q18 2 22 22z" fill="#2d2a24"/><path d="M28 50 l8 10 8-10" fill="#fff"/><path d="M25 40 q-3 12 11 12 q14 0 11-12 q-4 6-11 6 q-7 0-11-6z" fill="#6b4a2f"/></svg></div>
+      <div class="pinfo"><b>Isambard Kingdom Brunel</b><p>Chief Engineer, Great Western Railway | Bridges · Tunnels · Steamships | Thought Leader in Iron | Top Voice 🔩</p><p style="margin-top:6px">Bristol, England · Great Western Railway</p></div>
+      <div class="pstat">
+        <div class="stat">Profile viewers<span>1,851</span></div>
+        <div class="stat">Post impressions<span>44,390</span></div>
+      </div>
+      <div class="premium">Unlock exclusive steam tools &amp; insights<b>🟨 Try Premium for 0s. 0d.</b></div>
+      <div class="items">🔖 Saved blueprints</div>
+    </div>
+    <div class="card side2">
+      <h5>Recent</h5>
+      <div>👥 Royal Society of Engineers</div><div>👥 Steam Enthusiasts of Manchester</div><div>#️⃣ gauge_war</div>
+      <h5>Guilds</h5>
+      <div>👥 Institution of Civil Engineers</div><div>👥 Tunnelling (Mostly Underwater)</div>
+      <h5>Events</h5>
+      <div>📅 The Great Exhibition — Hyde Park</div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="card comp">
+      <div class="r1"><div class="sav"><svg width="48" height="48" viewBox="0 0 72 72"><rect width="72" height="72" fill="#e9dfc8"/><rect x="22" y="-4" width="28" height="30" fill="#1d1b18"/><rect x="14" y="22" width="44" height="5" fill="#1d1b18"/><ellipse cx="36" cy="38" rx="11" ry="13" fill="#d9b48f"/><path d="M14 72 q4-20 22-22 q18 2 22 22z" fill="#2d2a24"/></svg></div><div class="inp">Dispatch a post</div></div>
+      <div class="r2"><span>🖼️ Daguerreotype</span><span>📜 Pamphlet</span><span>✍️ Write treatise</span></div>
+    </div>
+    <div class="sort"><hr>Sort by: <b>Top ▾</b></div>
+
+    <!-- Post: Dickens -->
+    <div class="card">
+      <div class="ctx">👍 <b style="color:var(--text)">Ada Lovelace</b> &nbsp;celebrates this</div>
+      <div class="ph">
+        <div class="sav">✒️</div>
+        <div class="n"><b>Charles Dickens</b> <span class="deg">· 1st</span><p>Author | Serialised Content Creator | Former Blacking Factory Intern | Ex-Debtors' Prison<br>3d · 🌐</p></div>
+      </div>
+      <div class="body">
+        <p>I'm thrilled to announce that after 12 years of grinding, my latest serial <b>"David Copperfield"</b> has concluded! 🎉</p>
+        <p>When I was 12, I worked 10-hour days pasting labels on pots of boot-blacking. My father was in the Marshalsea. I had nothing.</p>
+        <p>Today I write for a living, and I've learned one thing: <b>there are no bad days, only chapters paid by the word.</b></p>
+        <p>Agree? 👇 <span class="ht">#Gratitude #Growth #Serialised #HardTimes #ComingSoon</span> <span class="more">…more</span></p>
+      </div>
+      <div class="soc"><span><span class="rx"><i style="background:#378fe9">👍</i><i style="background:#df704d">❤</i><i style="background:#6dae4f">👏</i></span> Elizabeth Gaskell and 18,211 others</span><span>1,902 comments · 677 reposts</span></div>
+      <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span><span>📨 Telegraph</span></div>
+    </div>
+
+    <!-- Post: Scrooge job -->
+    <div class="card">
+      <div class="ctx">Promoted · <b style="color:var(--text)">Scrooge &amp; Marley</b> is hiring</div>
+      <div class="ph">
+        <div class="sav" style="background:#2d2a24;color:#e9d79b;font-family:'Libre Caslon Text';font-weight:700;border-radius:4px">S&amp;M</div>
+        <div class="n"><b>Scrooge &amp; Marley, Counting-House</b><p>2 followers<br>Promoted</p></div>
+        <span class="follow">+ Follow</span>
+      </div>
+      <div class="body">
+        <p>We're a lean, <b>fast-paced, family-like</b> team in the City of London looking for a passionate Clerk to join us. 🕯️</p>
+        <p>✅ 15 shillings/week (competitive*)<br>✅ One (1) coal per day<br>✅ Unlimited unpaid overtime<br>❌ Christmas</p>
+        <p style="font-size:12px;color:var(--muted)">*Competitive with 1790.</p>
+      </div>
+      <div class="job"><div class="lg">S&amp;M</div><div><b>Junior Clerk (Hybrid: Office / Cold Office)</b><span>Scrooge &amp; Marley · London (On-site) · 1 applicant</span><span style="color:var(--green);font-weight:600">Actively recruiting · Marley no longer with the firm</span></div><span class="easy">Easy Apply</span></div>
+      <div class="soc"><span><span class="rx"><i style="background:#8c8c8c">😐</i></span> 4 others</span><span>612 comments</span></div>
+      <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span><span>📨 Telegraph</span></div>
+    </div>
+
+    <!-- Post: Ada -->
+    <div class="card">
+      <div class="ph">
+        <div class="sav">🧮</div>
+        <div class="n"><b>Ada Lovelace</b> <span class="deg">· 2nd</span><p>Enchantress of Number | Prompt Engineer for the Analytical Engine | ex-Byron (it's complicated)<br>1w · Edited · 🌐</p></div>
+        <span class="follow">+ Follow</span>
+      </div>
+      <div class="body">
+        <p>Hot take: the Analytical Engine will one day compose music and "might act upon other things besides number." 🎼</p>
+        <p>Charles says I'm "overhyping it." Charles has not finished building it in 17 years. 🙃</p>
+        <p>Anyway here's my Note G, the first algorithm. It's 65 pages long. No, I won't summarise. <span class="ht">#AI #FutureOfWork #WomenInSTEM</span></p>
+      </div>
+      <div class="img">
+        <svg viewBox="0 0 555 280" width="555" height="280">
+          <rect width="555" height="280" fill="#efe6cf"/>
+          <g stroke="#3a2f22" fill="none" stroke-width="1.6">
+            <rect x="60" y="40" width="435" height="200"/>
+            <g id="col"><path d="M100 60v160"/><circle cx="100" cy="80" r="14"/><circle cx="100" cy="115" r="14"/><circle cx="100" cy="150" r="14"/><circle cx="100" cy="185" r="14"/></g>
+            <use href="#col" x="55"/><use href="#col" x="110"/><use href="#col" x="165"/><use href="#col" x="220"/><use href="#col" x="275"/><use href="#col" x="330"/>
+            <path d="M60 60h435M60 220h435"/>
+          </g>
+          <g font-family="Libre Caslon Text" font-size="12" fill="#3a2f22"><text x="60" y="262">Fig. 1 — The Analytical Engine (proposed). Not to scale. Not built.</text></g>
+          <g font-family="Libre Caslon Text" font-size="10" fill="#6b5a40" text-anchor="middle">
+            <text x="100" y="84">0</text><text x="155" y="84">1</text><text x="210" y="84">1</text><text x="265" y="84">2</text><text x="320" y="84">3</text><text x="375" y="84">5</text><text x="430" y="84">8</text>
+          </g>
+        </svg>
+      </div>
+      <div class="soc"><span><span class="rx"><i style="background:#378fe9">👍</i><i style="background:#f5bb5c">💡</i></span> Charles Babbage and 9,044 others</span><span>2,114 comments</span></div>
+      <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span><span>📨 Telegraph</span></div>
+    </div>
+
+    <!-- Post: Open to work -->
+    <div class="card">
+      <div class="ph">
+        <div class="sav otw" style="overflow:visible;font-size:24px">🧹<span class="otwtag">#OPENTOWORK</span></div>
+        <div class="n"><b>Oliver T.</b> <span class="deg">· 3rd+</span><p>Aspiring Pickpocket → Pivoting to Apprentice Undertaker | Seeking More<br>12h · 🌐</p></div>
+      </div>
+      <div class="body">
+        <p>Please, sir, I want some more… <b>opportunities</b>. 🙏</p>
+        <p>Skills: gruel management, chimney navigation, street-level networking with Mr. Dawkins. Open to relocation (have been relocated several times without my consent).</p>
+        <p>Any reposts appreciated! 🔁 <span class="ht">#OpenToWork #Orphan #Workhouse</span></p>
+      </div>
+      <div class="soc"><span><span class="rx"><i style="background:#df704d">❤</i><i style="background:#378fe9">👍</i></span> Nancy and 40,112 others</span><span>9,833 comments · 22K reposts</span></div>
+      <div class="acts"><span>👍 Like</span><span>💬 Comment</span><span>🔁 Repost</span><span>📨 Telegraph</span></div>
+    </div>
+  </main>
+
+  <aside>
+    <div class="card news">
+      <h3>LinkedIron News <span>ⓘ</span></h3>
+      <div class="sub">Top stories</div>
+      <ul>
+        <li><b>Great Exhibition opens in Hyde Park</b><span>1d ago · 6,039,195 visitors</span></li>
+        <li><b>Crystal Palace: 300,000 panes, zero regrets</b><span>2d ago · 18,221 readers</span></li>
+        <li><b>Is it the miasma? Experts divided</b><span>3d ago · 9,402 readers</span></li>
+        <li><b>Railway mania: bubble or the future?</b><span>4h ago · 31,775 readers</span></li>
+        <li><b>Brunel vs. Stephenson: the gauge war heats up</b><span>1d ago · 4,410 readers</span></li>
+        <li><b>Top companies hiring children</b><span>2d ago · 12,904 readers</span></li>
+      </ul>
+      <div class="puzz"><b style="font-size:14px">Today's puzzles</b><div style="font-size:12px;color:var(--muted);margin-top:6px">🧩 Crossword (Latin) · ♟️ Chess by post · 📐 Find the Longitude</div></div>
+    </div>
+    <div class="card ad">
+      <span style="float:right">Ad ···</span>
+      <div style="clear:both"></div>
+      <div class="adimg"><div class="c">🎩</div><div class="c">🚂</div></div>
+      <p>Isambard, explore relevant opportunities with <b>Stephenson &amp; Son Locomotive Works</b></p>
+      <span class="btn">Follow</span>
+    </div>
+    <div class="foot">About · Accessibility · Help Center · Privacy &amp; Terms ▾ · Ad Choices · Advertising · Business Services ▾ · Get the LinkedIron pamphlet · More<br><b>in</b> LinkedIron Corporation © 1851</div>
+  </aside>
+</div>
+</body>
+</html>
